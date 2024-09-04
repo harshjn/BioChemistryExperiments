@@ -3,4 +3,16 @@ The goal is to build GUVs and SUVs which are large in size.
 
 ** Methodology: GUV-F
 We aim to make Fluorescent GUVs with DOPS and DOPC, and Liss-Rhod-PE
+500mOsm/L of Sucrose buffer is made by adding 17.12 g sucrose to 100 ml water.
+
+Using the protocol previously made on 29 July 2024. 
+|---------+---------------+--------|
+| Content | Concentration | Volume |
+|---------+---------------+--------|
+| DOPC    | 2.5 mg/ml     | 800 ul |
+| DOPS    | 2.5 mg/ml     | 80  ul |
+| Rh-PE   | 0.01 mg/ml    | 50 ul  |
+|         |               |        |
+
+Out of this solution, 50ul was deposited on a large ITO (50 mm x 50 mm) and left for drying.
 
