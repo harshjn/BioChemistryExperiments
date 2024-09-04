@@ -1,0 +1,7 @@
+** Goal of experiments
+The goal is to build GUVs and SUVs which are large in size. 
+
+** Methodology: GUV-F
+We aim to make Fluorescent GUVs. 
+
+
