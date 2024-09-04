@@ -12,7 +12,7 @@ Using the protocol previously made on 29 July 2024.
 | DOPC    | 2.5 mg/ml     | 800 ul |
 | DOPS    | 2.5 mg/ml     | 80  ul |
 | Rh-PE   | 0.01 mg/ml    | 50 ul  |
-|         |               |        |
+|---------+---------------+--------|
 
-Out of this solution, 50ul was deposited on a large ITO (50 mm x 50 mm) and left for drying.
+Out of this solution, 50ul was deposited on a large ITO (50 mm x 50 mm) and left for drying overnight.
 
