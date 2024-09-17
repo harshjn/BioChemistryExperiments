@@ -8,13 +8,6 @@ Created on Wed Jul 24 15:44:16 2024
 @author: harshjain
 """
 
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Apr 24 15:14:19 2024
-
-@author: harshjain
-"""
 import numpy as np
 
 #%% How to make 10% DOPS Solution
@@ -35,10 +28,12 @@ Concentrations = [2.5,2.5,0.01,2.5,0.1]; # In chloroform
 
 
 #%% Let's make 10% charged DOPS-DOPC (Negative, Fluoroscent)
-MixtureVolumes = [40,400,130,0,0]; #in microliters
+MixtureVolumes = [80,800,50 ,0,0]; #in microliters
 
 # Number of Weights in mixture
 Weights = np.array(np.multiply(MixtureVolumes, Concentrations))/1000 # in milligrams
+
+Moles = np.array(Weights)/np.array(Molecular_Weights)
 
 print('Moles')
 print(Moles)
@@ -52,7 +47,9 @@ print('Percentages')
 print(Percentages)
 
 #%% Let's make 90% charged DOTAP-DOPC (Positive, non-fluoroscent)
-MixtureVolumes = [0,100,0,400,15]; # in microliters
+Chemicals = ['DOPS','DOPC','LissRhod-PE', 'DOTAP', 'NBD-DOTAP']
+Concentrations = [2.5,10,0.01,2.5,0.1]; # In chloroform
+MixtureVolumes = [0,800,0,320,15]; # in microliters
 
 # Number of Weights in mixture
 Weights = np.multiply(MixtureVolumes, Concentrations)

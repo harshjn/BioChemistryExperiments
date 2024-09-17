@@ -1,0 +1,92 @@
+** Goal of experiments
+The goal is to build GUVs and SUVs which are large in size. 
+
+** Available solutions and their concentrations
+
+Using the protocol previously made on 29 July 2024. 
+|-------------+------------------+---------------+--------------|
+| Content     | Molecular weight | Concentration |       Volume |
+|             |            grams |         mg/ml |           ml |
+|-------------+------------------+---------------+--------------|
+| DOPS        |          809.518 |           2.5 |          1.5 |
+|             |                  |            10 |          0.2 |
+| DOPC        |          785.593 |            10 |          inf |
+| LissRhod-PE |         1300.712 |            10 | incoming 1mg |
+| DOTAP       |          697.578 |           2.5 |           14 |
+| NBD-DOTAP   |           710.34 |             1 |          1.5 |
+| NBD-DOTAP   |           710.34 |          0.01 |          1.5 |
+|-------------+------------------+---------------+--------------|
+[809.518,785.593,1300.712,697.578,710.34]
+
+# https://avantilipids.com/product/840035
+# https://avantilipids.com/product/850375
+# https://avantilipids.com/product/810150
+# https://avantilipids.com/product/890890
+# https://www.medchemexpress.com/fluorescent-dotap.html
+
+** Methodology: GUV-F
+We aim to make Fluorescent GUVs with DOPS and DOPC, and Liss-Rhod-PE
+500mOsm/L of Sucrose buffer is made by adding 17.12 g sucrose to 100 ml water.
+
+Using the protocol previously made on 29 July 2024.Also, 0.4 ml of this solution is left, made on 29 July, 2024. More DOPS has been ordered. 
+  
+|---------+---------------+--------|
+| Content | Concentration | Volume |
+|---------+---------------+--------|
+| DOPC    | 10 mg/ml      | 800 ul |
+| DOPS    | 10 mg/ml      | 80  ul |
+| Rh-PE   | 0.01 mg/ml    | 50 ul  |
+|---------+---------------+--------|
+Out of this solution, 100ul was deposited on a large ITO (50 mm x 50 mm) and left for drying overnight.
+
+For the electroformation, 50Hz, 6 Vpp and the distance between plates, ie, height of spacer: 1.2mm to 1.4 mm. 
+
+** Methodology: SUV-F
+***  September 4, 2024
+
+Using the protocol previously made on 20 June 2024. 
+|-----------+---------------+---------|
+| Content   | Concentration | Volume  |
+|-----------+---------------+---------|
+| DOPC      | 2.5 mg/ml     | 100 ul  |
+| DOTAP     | 2.5 mg/ml     | 400  ul |
+| NBD-DoTAP | 0.01 mg/ml    | 100 ul  |
+|           |               |         |
+|-----------+---------------+---------|
+
+So, I end up putting 100 ul of a solution into 6 vials and let them dry. 
+
+***  September 17, 2024, Tuesday 
+It turns out that 100 ul is too little and the fluorescent concentrations here are too little as well.
+So, it will be better to use the 
+
+**** Sample 1 - SUV-F
+55% DOTAP Fluorescent
+|-----------+---------------+----------|
+| Content   | Concentration | Volume   |
+|-----------+---------------+----------|
+| DOPC      | 10 mg/ml      | 200 ul   |
+| DOTAP     | 2.5 mg/ml     | 1000  ul |
+| NBD-DoTAP | 0.01 mg/ml    | 300 ul   |
+|-----------+---------------+----------|
+The entire contents are left for drying overnight in a vial.
+
+
+**** Sample 2 - SUV-Ff
+38% DOTAP Fluorescent
+|-----------+---------------+---------|
+| Content   | Concentration | Volume  |
+|-----------+---------------+---------|
+| DOPC      | 10 mg/ml   | 200 ul |
+| DOTAP     | 2.5 mg/ml     | 500  ul |
+| NBD-DoTAP | 0.01 mg/ml    | 300 ul |
+|           |               |         |
+|-----------+---------------+---------|
+The entire contents are left for drying overnight in a vial. 
+
+
+
+** GUV-F
+I will make 50% DOPS-DOPC solution by adding 160 microliters of each to a vial. This can indeed be diluted later on. 
+
+
