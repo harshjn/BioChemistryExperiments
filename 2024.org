@@ -77,16 +77,37 @@ The entire contents are left for drying overnight in a vial.
 |-----------+---------------+---------|
 | Content   | Concentration | Volume  |
 |-----------+---------------+---------|
-| DOPC      | 10 mg/ml   | 200 ul |
+| DOPC      | 10 mg/ml      | 200 ul  |
 | DOTAP     | 2.5 mg/ml     | 500  ul |
-| NBD-DoTAP | 0.01 mg/ml    | 300 ul |
+| NBD-DoTAP | 0.01 mg/ml    | 300 ul  |
 |           |               |         |
 |-----------+---------------+---------|
 The entire contents are left for drying overnight in a vial. 
 
+***  September 23, 2024, Monday
+The results of the SUV-F characterization can be found in ~/OneDrive/Work2024/Experiments_Sept/Sept23/IISC_DLS_Results.
+We find that the vesicles are quite uniform in size at 200 nm, although expected was 100 nm diameter for 100 nm pore size. Moreover, varying the charge didn't really materialise as Sample 1,2 had surface charge of 55% and Sample 3,4 had surface charge of 38% but the potential is measured to be the same in both cases. 
+**** TODO Identify a way to measure surface charge using the DLS technique, and quantitatively establish if 10% and 90% charge is measured to be different by preparing 90% and 10% charged vesicles. 
 
 
 ** GUV-F
 I will make 50% DOPS-DOPC solution by adding 160 microliters of each to a vial. This can indeed be diluted later on. 
+
+** Protocol-Experiments: October - Viscoelasticity/osmosis
+***  September 30, 2024, Monday
+In these set of experiments we aim to vary the visco-elasticity of the medium in which vesicles are formed by varying the concentration of methyl-cellulose. At the same time, we are varying the glucose and sucrose concentrations. 
+
+We use the medium of 0.25% methyl cellulose (0.025 g in 10 ml of water) and use it as the buffer for building our vesicles. 
+For the vesicle solution we use the DOPC+NBD-DoTAP medium where 80 ul of 2.5 mg/ml solution is used in 20 ul of 0.01 mg/ml fluorescent TAP.
+
+|-----------+---------------+--------+----------|
+| Chemical  | concentration | volume | Molarity |
+|-----------+---------------+--------+----------|
+| DOPC      | 2.5 mg/ml     | 80 ul  |    99.9% |
+| NBD-DoTAP | 0.01mg/ml     | 20 ul  |     0.1% |
+|           |               |        |          |
+
+100 ul of this fluid was deposited on a ITO slide and left for drying in vacuum overnight after covering it in foil to prevent photo-bleaching. 
+
 
 
