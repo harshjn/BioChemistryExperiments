@@ -110,4 +110,3 @@ For the vesicle solution we use the DOPC+NBD-DoTAP medium where 80 ul of 2.5 mg/
 100 ul of this fluid was deposited on a ITO slide and left for drying in vacuum overnight after covering it in foil to prevent photo-bleaching. 
 
 
-
