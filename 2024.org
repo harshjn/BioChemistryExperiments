@@ -100,13 +100,80 @@ In these set of experiments we aim to vary the visco-elasticity of the medium in
 We use the medium of 0.25% methyl cellulose (0.025 g in 10 ml of water) and use it as the buffer for building our vesicles. 
 For the vesicle solution we use the DOPC+NBD-DoTAP medium where 80 ul of 2.5 mg/ml solution is used in 20 ul of 0.01 mg/ml fluorescent TAP.
 
+
 |-----------+---------------+--------+----------|
 | Chemical  | concentration | volume | Molarity |
 |-----------+---------------+--------+----------|
-| DOPC      | 2.5 mg/ml     | 80 ul  |    99.9% |
-| NBD-DoTAP | 0.01mg/ml     | 20 ul  |     0.1% |
+| DOPC      | 10 mg/ml      | 40 ul  |   99.95% |
+| NBD-DoTAP | 0.01mg/ml     | 20 ul  |    0.05% |
 |           |               |        |          |
 
-100 ul of this fluid was deposited on a ITO slide and left for drying in vacuum overnight after covering it in foil to prevent photo-bleaching. 
+60 ul of this fluid was deposited on a ITO slide and left for drying in vacuum overnight after covering it in foil to prevent photo-bleaching. 
 
 
+#+BEGIN_SRC python :results output
+import numpy as np
+print("Hello,world")
+
+
+# https://avantilipids.com/product/840035
+# https://avantilipids.com/product/850375
+# https://avantilipids.com/product/810150
+# https://avantilipids.com/product/890890
+# https://www.medchemexpress.com/fluorescent-dotap.html
+
+#%% Let's make 90% charged DOTAP-DOPC (Positive, non-fluoroscent)
+Chemicals = ['DOPS','DOPC','LissRhod-PE', 'DOTAP', 'NBD-DOTAP']
+Concentrations = [2.5,10,0.01,2.5,0.01]; # In chloroform
+MixtureVolumes = [0,40,0,0,20]; # in microliters
+Molecular_Weights = [809.518,785.593,1300.712,697.578,710.34]
+
+# Number of Weights in mixture
+Weights = np.multiply(MixtureVolumes, Concentrations)
+# Percentage of moles in mixture
+Percentages = np.round(100000 * np.array(Weights) / np.sum(Weights)) / 1000
+
+Moles = np.array(Weights)/np.array(Molecular_Weights)
+
+np.set_printoptions(suppress=True, precision=5)
+
+print('Moles')
+print(Moles)
+print('Weights')
+print(Weights)
+# Percentage of moles in mixture
+print('Weight Percentages')
+print(np.round(Percentages,2))
+#+END_SRC
+
+#+RESULTS:
+: Hello,world
+: Moles
+: [0.      0.50917 0.      0.      0.00028]
+: Weights
+: [  0.  400.    0.    0.    0.2]
+: Weight Percentages
+: [ 0.   99.95  0.    0.    0.05]
+
+
+
+***  October  1, 2024, Tuesday
+We aim to make at least two columns in the same PDMS spacer plate so that we have a slightly higher throughput of at least two samples in one electroformation. 
+
+Next we place 0.125% MC (Methyl Cellulose) with 500mM sucrose and 500mM sucrose in water into Electroformation as follows:
+
+1 hr: 10 Hz 6 Vpp (11.40-12.40)
+1 hr: 10 Hz 9 Vpp (12.40-13.40)
+1 hr: 50 Hz 9 Vpp (13.40-14.40)
+
+Then we prepare 0.125% MC with 500mM Glucose solution and 500mM Glucose solution in water and try to observe vesicles in both cases. 
+
+We also need two chambers for each of the two samples. 
+
+Observations: We observed that the 
+
+***  October  2, 2024, Wednesday
+Plan is to do multiple experiments in a day and extract out numbers:
+1. How does the area expansion change in the presence of osmotic shock
+2. How does the area expansion change in the presence of fusion
+3. 
