@@ -24,11 +24,11 @@ Using the protocol previously made on 29 July 2024.
 # https://avantilipids.com/product/890890
 # https://www.medchemexpress.com/fluorescent-dotap.html
 
-** Methodology: GUV-F
+** Protocol-Experiments: August - GUV-f
 We aim to make Fluorescent GUVs with DOPS and DOPC, and Liss-Rhod-PE
 500mOsm/L of Sucrose buffer is made by adding 17.12 g sucrose to 100 ml water.
 
-Using the protocol previously made on 29 July 2024.Also, 0.4 ml of this solution is left, made on 29 July, 2024. More DOPS has been ordered. 
+Using the protocol previously made on 29 July 2024. Also, 0.4 ml of this solution is left, made on 29 July, 2024. More DOPS has been ordered. 
   
 |---------+---------------+--------|
 | Content | Concentration | Volume |
@@ -39,10 +39,9 @@ Using the protocol previously made on 29 July 2024.Also, 0.4 ml of this solution
 |---------+---------------+--------|
 Out of this solution, 100ul was deposited on a large ITO (50 mm x 50 mm) and left for drying overnight.
 
-For the electroformation, 50Hz, 6 Vpp and the distance between plates, ie, height of spacer: 1.2mm to 1.4 mm. 
 
-** Methodology: SUV-F
-***  September 4, 2024
+** Protocol-Experiments: September - SUV - BSA coating
+***  September 4, 2024 - SUV
 
 Using the protocol previously made on 20 June 2024. 
 |-----------+---------------+---------|
@@ -72,7 +71,7 @@ So, it will be better to use the
 The entire contents are left for drying overnight in a vial.
 
 
-**** Sample 2 - SUV-Ff
+**** Sample 2 - SUV-F
 38% DOTAP Fluorescent
 |-----------+---------------+---------|
 | Content   | Concentration | Volume  |
@@ -84,16 +83,31 @@ The entire contents are left for drying overnight in a vial.
 |-----------+---------------+---------|
 The entire contents are left for drying overnight in a vial. 
 
+**** Before DLS measurement
+1ml of water was added to the dried up 55% solution. Then 500 ul of it was added to 500 ul of water. 0.8 ml of that solution was used but 0.2 ml of that got wasted. 0.6 ml of sample 1 was prepared after 15 cycles of extrusion.
+
+For sample 2, 0.4ml of solution was added to 0.5 ml of water. 0.3 ml was wasted and 0.6 ml of final solution was made and labelled as 55 ext 2. Extrusion was done 10 times. 
+
+For sample 3, 0.5 ml of 38% solution was added to 0.5ml of water and extruded 5 times.
+
+For sample 4, 0.5 ml of 38% solution was added to 0.5ml water and extruded 10 times, but 0.5 ml was lost. So, we end up with 0.5 ml of solution.
+
+*100 ul of each sample was added to 3ml of water for testing.*
+
 ***  September 23, 2024, Monday
-The results of the SUV-F characterization can be found in ~/OneDrive/Work2024/Experiments_Sept/Sept23/IISC_DLS_Results.
+The results of the SUV-F characterization can be found in ~/OneDrive/Work2024/BioMembranesExperiments/Experiments_Sept/Sept23/IISC_DLS_Results.
 We find that the vesicles are quite uniform in size at 200 nm, although expected was 100 nm diameter for 100 nm pore size. Moreover, varying the charge didn't really materialise as Sample 1,2 had surface charge of 55% and Sample 3,4 had surface charge of 38% but the potential is measured to be the same in both cases. 
 **** TODO Identify a way to measure surface charge using the DLS technique, and quantitatively establish if 10% and 90% charge is measured to be different by preparing 90% and 10% charged vesicles. 
 
+***  September 22, 2024, Sunday - Coating the micro-pipette with BSA
+In order to coat it in Glucose BSA solution, 
+we take 0.045 g of BSA and mix it with 4.5 ml of 0.1 M solution of glucose (180 mg in 10 ml).
 
-** GUV-F
-I will make 50% DOPS-DOPC solution by adding 160 microliters of each to a vial. This can indeed be diluted later on. 
+*Successfully working pressure protocol after coating overnight with BSA.*
 
-** Protocol-Experiments: October - Viscoelasticity/osmosis
+
+
+** Protocol-Experiments: October - Viscoelasticity/osmosis - Electroformation
 ***  September 30, 2024, Monday
 In these set of experiments we aim to vary the visco-elasticity of the medium in which vesicles are formed by varying the concentration of methyl-cellulose. At the same time, we are varying the glucose and sucrose concentrations. 
 
@@ -114,13 +128,6 @@ For the vesicle solution we use the DOPC+NBD-DoTAP medium where 80 ul of 2.5 mg/
 #+BEGIN_SRC python :results output
 import numpy as np
 print("Hello,world")
-
-
-# https://avantilipids.com/product/840035
-# https://avantilipids.com/product/850375
-# https://avantilipids.com/product/810150
-# https://avantilipids.com/product/890890
-# https://www.medchemexpress.com/fluorescent-dotap.html
 
 #%% Let's make 90% charged DOTAP-DOPC (Positive, non-fluoroscent)
 Chemicals = ['DOPS','DOPC','LissRhod-PE', 'DOTAP', 'NBD-DOTAP']
@@ -162,15 +169,17 @@ We aim to make at least two columns in the same PDMS spacer plate so that we hav
 
 Next we place 0.125% MC (Methyl Cellulose) with 500mM sucrose and 500mM sucrose in water into Electroformation as follows:
 
-1 hr: 10 Hz 6 Vpp (11.40-12.40)
-1 hr: 10 Hz 9 Vpp (12.40-13.40)
-1 hr: 50 Hz 9 Vpp (13.40-14.40)
+3 hr: 10 Hz 6 Vpp 
+1 hr: 10 Hz 9 Vpp (optional)
+
+After electroformation, air column was moved around to encourage detachment. 
 
 Then we prepare 0.125% MC with 500mM Glucose solution and 500mM Glucose solution in water and try to observe vesicles in both cases. 
 
-We also need two chambers for each of the two samples. 
+We also need two chambers for each of the two samples: 0.5 M Sucrose in water and 0.5M Sucrose in 0.125% MC Buffer.
 
-Observations: We observed that the 
+Observations: We observed that the vesicles are obtained in both samples with size larger than 20 micrometer in diameter.
+Unilamellar fluctuating vesicles are obtained in both media and under osmotic shock, provided by either glucose/sucrose or MC, they expand. Moreover, they settle in the MC media as well due to sucrose/glucose density difference.  
 
 ***  October  2, 2024, Wednesday
 Plan is to do multiple experiments in a day and extract out numbers:
