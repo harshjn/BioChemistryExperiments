@@ -16,13 +16,14 @@ Using the protocol previously made on 29 July 2024.
 | NBD-DOTAP   |           710.34 |             1 |          1.5 |
 | NBD-DOTAP   |           710.34 |          0.01 |          1.5 |
 |-------------+------------------+---------------+--------------|
-[809.518,785.593,1300.712,697.578,710.34]
 
-# https://avantilipids.com/product/840035
-# https://avantilipids.com/product/850375
-# https://avantilipids.com/product/810150
-# https://avantilipids.com/product/890890
-# https://www.medchemexpress.com/fluorescent-dotap.html
+Sources:
+MW: [809.518,785.593,1300.712,697.578,710.34]
+https://avantilipids.com/product/840035
+https://avantilipids.com/product/850375
+https://avantilipids.com/product/810150
+https://avantilipids.com/product/890890
+https://www.medchemexpress.com/fluorescent-dotap.html
 
 ** Protocol-Experiments: August - GUV-f
 We aim to make Fluorescent GUVs with DOPS and DOPC, and Liss-Rhod-PE
