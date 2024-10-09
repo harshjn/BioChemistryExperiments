@@ -132,7 +132,7 @@ print("Hello,world")
 #%% Let's make 90% charged DOTAP-DOPC (Positive, non-fluoroscent)
 Chemicals = ['DOPS','DOPC','LissRhod-PE', 'DOTAP', 'NBD-DOTAP']
 Concentrations = [2.5,10,0.01,2.5,0.01]; # In chloroform
-MixtureVolumes = [0,40,0,0,20]; # in microliters
+MixtureVolumes = [0,80,0,0,10]; # in microliters
 Molecular_Weights = [809.518,785.593,1300.712,697.578,710.34]
 
 # Number of Weights in mixture
@@ -156,11 +156,11 @@ print(np.round(Percentages,2))
 #+RESULTS:
 : Hello,world
 : Moles
-: [0.      0.50917 0.      0.      0.00028]
+: [0.      1.01834 0.      0.      0.00014]
 : Weights
-: [  0.  400.    0.    0.    0.2]
+: [  0.  800.    0.    0.    0.1]
 : Weight Percentages
-: [ 0.   99.95  0.    0.    0.05]
+: [ 0.   99.99  0.    0.    0.01]
 
 
 
@@ -180,9 +180,33 @@ We also need two chambers for each of the two samples: 0.5 M Sucrose in water an
 
 Observations: We observed that the vesicles are obtained in both samples with size larger than 20 micrometer in diameter.
 Unilamellar fluctuating vesicles are obtained in both media and under osmotic shock, provided by either glucose/sucrose or MC, they expand. Moreover, they settle in the MC media as well due to sucrose/glucose density difference.  
+**** TODO need to write the thickness of spacer
 
-***  October  2, 2024, Wednesday
-Plan is to do multiple experiments in a day and extract out numbers:
-1. How does the area expansion change in the presence of osmotic shock
-2. How does the area expansion change in the presence of fusion
-3. 
+***  October  2, 2024, Wednesday 
+The fluorescent solution was prepared with 80 ul of DOPC (10mg/ml) and 10 ul of NBD-DOTAP (0.01mg/ml)
+Two ITO slides were coated with 40 ul of solution each. 
+**** Need to make another spacer as well as frech batch of DOPC/NBD-DOTAP solutions. 
+**** Start electroformation in two samples at the same time, and then use it for further experiments. 
+**** Put the vesicle into water itself. If we need to control osmosis rate, we can use cholesterol.
+
+***  October  7, 2024, Monday
+ 9:28 AM started electroformation for 0.25% MC with 500mM Sucrose and 0.5% MC. 
+Here's what was deposited:
+|-----------+---------------+--------+----------|
+| Chemical  | concentration | volume | Molarity |
+|-----------+---------------+--------+----------|
+| DOPC      | 10 mg/ml      | 80 ul  |   99.99% |
+| NBD-DoTAP | 0.01mg/ml     | 10 ul  |    0.01% |
+|           |               |        |          |
+
+45 ul of each was deposited on two plates. 
+ 
+
+***  October  9, 2024, Wednesday
+Plan: 
+Medium: GM3 for 5mg/ml solution. 0.5 mg in 0.5 ml. Dry 100 ul in 1 M Glucose. 
+
+Vesicle: 0.1% fluorescent DOPC vesicle
+
+Following that osmotic shock will be provided.
+
