@@ -203,10 +203,11 @@ Here's what was deposited:
  
 
 ***  October  9, 2024, Wednesday
-Plan: 
+Plan: GM3 can sit inside the membrane itself at the time of electroformation or it can be introduced into the medium. Or both. Here we introduce via medium. 
+
 Medium: GM3 for 5mg/ml solution. 0.5 mg in 0.5 ml. Dry 100 ul in 1 M Glucose. 
 
-Vesicle: 0.1% fluorescent DOPC vesicle
+Vesicle: 0.1% fluorescent DOPC vesicle.
 
 Following that osmotic shock will be provided.
 

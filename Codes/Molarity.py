@@ -13,9 +13,10 @@ import numpy as np
 #%% How to make 10% DOPS Solution
 
 Chemicals = ['DOPS','DOPC','LissRhod-PE', 'DOTAP', 'NBD-DOTAP']
-Molecular_Weights = [809.518,785.593,1300.712,697.578,710.34]
 #Exact masses extracted from Avanti-Lipids Website
-Concentrations = [2.5,2.5,0.01,2.5,0.1]; # In chloroform
+Concentrations = [2.5,10,0.01,2.5,0.01]; # In chloroform
+
+Molecular_Weights = [809.518,785.593,1300.712,697.578,710.34]
 
 # https://avantilipids.com/product/840035
 # https://avantilipids.com/product/850375
@@ -48,8 +49,9 @@ print(Percentages)
 
 #%% Let's make 90% charged DOTAP-DOPC (Positive, non-fluoroscent)
 Chemicals = ['DOPS','DOPC','LissRhod-PE', 'DOTAP', 'NBD-DOTAP']
-Concentrations = [2.5,10,0.01,2.5,0.1]; # In chloroform
-MixtureVolumes = [0,800,0,320,15]; # in microliters
+Concentrations = [2.5,2.5,0.01,2.5,0.01]; # In chloroform
+MixtureVolumes = [0,80,0,0,20]; # in microliters
+
 
 # Number of Weights in mixture
 Weights = np.multiply(MixtureVolumes, Concentrations)
