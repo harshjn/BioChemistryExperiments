@@ -133,16 +133,16 @@ print("Hello,world")
 #%% Let's make 90% charged DOTAP-DOPC (Positive, non-fluoroscent)
 Chemicals = ['DOPS','DOPC','LissRhod-PE', 'DOTAP', 'NBD-DOTAP']
 Concentrations = [2.5,10,0.01,2.5,0.01]; # In chloroform
-MixtureVolumes = [0,80,0,0,10]; # in microliters
+MixtureVolumes = [0,30,20,0,0]; # in microliters
 Molecular_Weights = [809.518,785.593,1300.712,697.578,710.34]
 
 # Number of Weights in mixture
 Weights = np.multiply(MixtureVolumes, Concentrations)
 # Percentage of moles in mixture
-Percentages = np.round(100000 * np.array(Weights) / np.sum(Weights)) / 1000
+WeightPercentages =  np.array(Weights) / np.sum(Weights) * 100
 
 Moles = np.array(Weights)/np.array(Molecular_Weights)
-
+MolePercentages = np.array(Moles) / np.sum(Moles) *100
 np.set_printoptions(suppress=True, precision=5)
 
 print('Moles')
@@ -150,18 +150,23 @@ print(Moles)
 print('Weights')
 print(Weights)
 # Percentage of moles in mixture
-print('Weight Percentages')
-print(np.round(Percentages,2))
+print('weight Percentages')
+print(np.round(WeightPercentages,2))
+print('Mole Percentages')
+print(np.round(MolePercentages,2))
+
 #+END_SRC
 
 #+RESULTS:
 : Hello,world
 : Moles
-: [0.      1.01834 0.      0.      0.00014]
+: [0.      0.38188 0.00015 0.      0.     ]
 : Weights
-: [  0.  800.    0.    0.    0.1]
-: Weight Percentages
-: [ 0.   99.99  0.    0.    0.01]
+: [  0.  300.    0.2   0.    0. ]
+: weight Percentages
+: [ 0.   99.93  0.07  0.    0.  ]
+: Mole Percentages
+: [ 0.   99.96  0.04  0.    0.  ]
 
 
 
@@ -211,4 +216,21 @@ Medium: GM3 for 5mg/ml solution. 0.5 mg in 0.5 ml. Dry 100 ul in 1 M Glucose.
 Vesicle: 0.1% fluorescent DOPC vesicle.
 
 Following that osmotic shock will be provided.
+
+
+***  October  9, 2024, Wednesday
+Concentrations
+
+**** GM3 solution:
+Prepare 5mg/ml solution by adding 1mg to 200 ul of chloroform. 
+Deposit 100 ul of this solution into a 1 ml vial and leave for drying overnight.
+
+**** Fluorescent vesicle:
+|-------------+---------------+--------+--------------|
+| Chemical    | concentration | volume | Mole percent |
+|-------------+---------------+--------+--------------|
+| DOPC        | 10 mg/ml      | 30 ul  |       99.96% |
+| LissRhod-PE | 0.01mg/ml     | 20 ul  |        0.04% |
+|             |               |        |              |
+
 
