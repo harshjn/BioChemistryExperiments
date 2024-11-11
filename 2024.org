@@ -211,7 +211,7 @@ Here's what was deposited:
 ***  October  9, 2024, Wednesday
 Plan: GM3 can sit inside the membrane itself at the time of electroformation or it can be introduced into the medium. Or both. Here we introduce via medium. 
 
-Medium: GM3 for 5mg/ml solution. 0.5 mg in 0.5 ml. Dry 100 ul in 1 M Glucose. 
+Medium: GM3 for 5mg/ml solution. 0.5 mg in 0.5 ml. Dry 100 ul in a vial and mix it in 1 M Glucose. 
 
 Vesicle: 0.1% fluorescent DOPC vesicle.
 
@@ -243,14 +243,44 @@ We start with the stock 1mg powder of Liss-Rhod PE and then we add it to 20 ml o
 This gives us 20 ml of stock solution which we can use for a long time. 
 
 My first goal is to measure the properties of DOPC and DOPE. 
+
 |-------------+---------------+--------+--------------|
 | Chemical    | concentration | volume | Mole percent |
 |-------------+---------------+--------+--------------|
-| DOPC        | 10 mg/ml      | 80 ul  |       99.92% |
-| LissRhod-PE | 0.05mg/ml     | 20 ul  |        0.08% |
+| DOPC        | 2.5 mg/ml     | 90 ul  |       99.87% |
+| LissRhod-PE | 0.05mg/ml     | 10 ul  |        0.13% |
+|             |               |        |              |
+
 
 This gives us around 0.1 % solution of Liss-Rhod PE in DOPC. 
 We deposit around 45 ul of this solution on-to two ITO plates. 
 
 This will be followed by electroformation. The inside buffer used is Sucrose and outside is Glucose. 
-Electroformation will be done for 3 hours at 6 Vpp 10 Hz. 
+Electroformation will be done for 3 hours at 6 Vpp 50 Hz (It should be 6Vpp 10 Hz ideally). 
+
+
+**  November  8, 2024, Friday
+We performed the experiment to compare the pressure applied by the motion of vertical stage with the pressure applied by the syringe pump and also to calibrate the two. 
+
+We observed that the pressure applied 
+
+|-------|
+|       |
+| 2.527 |
+| 2.417 |
+
+0.11 +- 0.02 V corresponds to 2cm of water column height or 196 Pascals or 1.96 mBar. 
+Correspondingly, for a change in volume of 10 microliters, the pressure change is 0.04 +- 0.01 V or around 70 +- 10 Pascals.
+volume in the griener tube (15ml) is around 5 ml and 10+ml is empty. 
+**  November 11, 2024, Monday
+We make Sucrose and Glucose 1 Molar solutions by adding 3.42 grams and 1.81 grams of each into 10ml water respectively. 
+
+We also made 0.1 M BSA solution by adding 180 mg of BSA to 10 ml of water. 
+
+For the electroformation, I use 0.125M Sucrose solution ( 1.25 ml of 1M solution with 8.75 ml of water)
+
+We now test the parameters for the fluorescence. We also test the density to get an estimate of dilution required. 
+
+Need to fix the camera and the image software in such a way that it can be input into python if required in future. 
+
+In the experiment, we first aim to slowly hold a vesicle with a slight negative pressure and once we have a hold of it, we can apply continuously increasing pressures until it bursts. 
