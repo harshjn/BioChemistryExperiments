@@ -4,18 +4,21 @@ The goal is to build GUVs and SUVs which are large in size.
 ** Available solutions and their concentrations
 
 Using the protocol previously made on 29 July 2024. 
-|---------------+------------------+---------------+--------|
-| Content       | Molecular weight | Concentration | Volume |
-|               |            grams |         mg/ml |     ml |
-|---------------+------------------+---------------+--------|
-| DOPS          |          809.518 |           2.5 |    1.5 |
-| DOPS (Powder) |                  |         25 mg |        |
-| DOPC          |          785.593 |            10 |    inf |
-| LissRhod-PE   |         1300.712 |          5 mg |        |
-| DOTAP         |          697.578 |           2.5 |     14 |
-| NBD-DOTAP     |           710.34 |             1 |    1.5 |
-| NBD-DOTAP     |           710.34 |          0.01 |    1.5 |
-|---------------+------------------+---------------+--------|
+|---------------+------------------+---------------+---------|
+| Content       | Molecular weight | Concentration |     Qty |
+|               |            grams |         mg/ml | g or ml |
+|---------------+------------------+---------------+---------|
+| DOPS          |          809.518 |           2.5 |     1.5 |
+| DOPS (Powder) |                  |         25 mg |         |
+| DOPC          |          785.593 |            10 |     inf |
+| LissRhod-PE   |         1300.712 |          5 mg |     inf |
+| DOTAP         |          697.578 |           2.5 |      14 |
+| NBD-DOTAP     |           710.34 |             1 |     1.5 |
+| NBD-DOTAP     |           710.34 |          0.01 |     1.5 |
+| GM3           |                  |               |         |
+| AOT           |                  |               |    25 g |
+|---------------+------------------+---------------+---------|
+|               |                  |               |         |
 
 Sources:
 MW: [809.518,785.593,1300.712,697.578,710.34]
@@ -24,6 +27,7 @@ https://avantilipids.com/product/850375
 https://avantilipids.com/product/810150
 https://avantilipids.com/product/890890
 https://www.medchemexpress.com/fluorescent-dotap.html
+AOT: https://www.sigmaaldrich.com/IN/en/product/aldrich/323586
 
 ** Protocol-Experiments: August - GUV-f
 We aim to make Fluorescent GUVs with DOPS and DOPC, and Liss-Rhod-PE
@@ -132,8 +136,8 @@ print("Hello,world")
 
 #%% Let's make 90% charged DOTAP-DOPC (Positive, non-fluoroscent)
 Chemicals = ['DOPS','DOPC','LissRhod-PE', 'DOTAP', 'NBD-DOTAP']
-Concentrations = [2.5,2.5,0.05,2.5,0.01]; # In chloroform
-MixtureVolumes = [0,90,10,0,0]; # in microliters
+Concentrations = [2.5,10,0.05,2.5,0.01]; # In chloroform
+MixtureVolumes = [0,85,15,0,0]; # in microliters
 Molecular_Weights = [809.518,785.593,1300.712,697.578,710.34]
 
 # Number of Weights in mixture
@@ -160,13 +164,13 @@ print(np.round(MolePercentages,2))
 #+RESULTS:
 : Hello,world
 : Moles
-: [0.      0.28641 0.00038 0.      0.     ]
+: [0.      1.08199 0.00058 0.      0.     ]
 : Weights
-: [  0.  225.    0.5   0.    0. ]
+: [  0.   850.     0.75   0.     0.  ]
 : weight Percentages
-: [ 0.   99.78  0.22  0.    0.  ]
+: [ 0.   99.91  0.09  0.    0.  ]
 : Mole Percentages
-: [ 0.   99.87  0.13  0.    0.  ]
+: [ 0.   99.95  0.05  0.    0.  ]
 
 
 
@@ -273,6 +277,7 @@ We observed that the pressure applied
 Correspondingly, for a change in volume of 10 microliters, the pressure change is 0.04 +- 0.01 V or around 70 +- 10 Pascals.
 volume in the griener tube (15ml) is around 5 ml and 10+ml is empty. 
 **  November 11, 2024, Monday
+*** MicroPipette experiments
 We make Sucrose and Glucose 1 Molar solutions by adding 3.42 grams and 1.81 grams of each into 10ml water respectively. 
 
 We also made 0.1 M BSA solution by adding 180 mg of BSA to 10 ml of water. 
@@ -284,3 +289,37 @@ We now test the parameters for the fluorescence. We also test the density to get
 Need to fix the camera and the image software in such a way that it can be input into python if required in future. 
 
 In the experiment, we first aim to slowly hold a vesicle with a slight negative pressure and once we have a hold of it, we can apply continuously increasing pressures until it bursts. 
+
+Exposure for the 0.1 M Liss-Rhod Solution was set at 8 ms which was enough for capturing images. Not much fluorescent degradation was observed using the light continuously although we would prefer setting it up in an auto-shutter way in the future. 
+
+*** Other Experiments: Viscoelasticity of the medium
+We now have a look at how to increase visco-elasticity of a system and 
+
+*** Other experiments: Membrane disorder control
+
+**  November 17, 2024, Sunday
+I have done: made a new chamber with a better design, and dip the pipettes in BSA and finally let the slides dry as well as GM3 dry.
+
+**  November 18, 2024, Monday
+|-------------+---------------+--------+--------------|
+| Chemical    | concentration | volume | Mole percent |
+|-------------+---------------+--------+--------------|
+| DOPC        | 10 mg/ml      | 85 ul |       99.95% |
+| LissRhod-PE | 0.05mg/ml     | 15 ul |        0.05% |
+|             |               |        |              |
+With this concentration, I have prepared solutions for drying, which I will dry daily. 
+Moreover, I have dipped pipettes in BSA as well. 
+Pulled 10 new pipettes with Program 5 in Upi's lab. Parameters for pipette puller are: ... speed 70
+
+**  November 19, 2024, Tuesday
+I have done electroformation for slide coated on both sides at 9 Vpp and 10 Hz for 3 hours from 10 am to 1 pm. 
+For the lissRhod-PE, 560 nm is peak absorption and 583 nm is peak emission.
+
+Sucrose solution was prepared at 0.5 Molarity by adding 1.715 g in 10 ml of water. 
+Glucose solution at 0.5 Molarity was also prepared.
+Prepared the slides of PDMS and bonded them with clean glass slide cover slip via plasma cleaning (for 2.5 minutes). 
+GM3 solution which was dried up, was added as well. To the dried solution, 1 ml of water was added and this was then diluted to 10 ml and added to the solution. 
+
+
+
+
