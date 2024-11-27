@@ -321,5 +321,5 @@ Prepared the slides of PDMS and bonded them with clean glass slide cover slip vi
 GM3 solution which was dried up, was added as well. To the dried solution, 1 ml of water was added and this was then diluted to 10 ml and added to the solution. 
 
 
-
-
+**  November 27, 2024, Wednesday
+Testing a new protocol so leaving the electroformation of 45 ul deposited lipids at 500 Hz and 10 Volts overnight. 
