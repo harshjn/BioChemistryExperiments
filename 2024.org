@@ -1,3 +1,106 @@
+
+
+* Fluorescence
+What is epifluorescence, burner lamp and DIA in microscope facility?
+
+Microscope facility
+|--------+-------------------+---------------+-----------------|
+| Laser  | wavelength | emission peak | absorption peak |
+|--------+-------------------+---------------+-----------------|
+| DAPI   | 405 nm            |           358 |             461 |
+| FITC   | 488 nm            |           495 |             519 |
+| Yellow | 543 nm            |               |                 |
+| Red    | 633 nm            |               |                 |
+
+* Terminal commands:
+
+*** format the screenrecord video for vlc viewer
+ ffmpeg -ignore_editlist 1 -i 2.mp4 -c copy output.mp4
+*** Hardware accelerated avi conversion to imageJ format uncompressed
+ffmpeg -hwaccel videotoolbox -i output.mp4 \                            
+    -c:v rawvideo \
+    -pix_fmt gray8 \
+    -fps_mode cfr \
+    -r 15 \
+    output_uncompressed.avi
+* Python Code
+** Molarity Calculations
+
+#+BEGIN_SRC python :results output
+import numpy as np
+print("Hello,world")
+
+#%% Let's make 90% charged DOTAP-DOPC (Positive, non-fluoroscent)
+Chemicals = ['DOPS','DOPC','LissRhod-PE', 'DOTAP', 'NBD-DOTAP']
+Concentrations = [2.5,2.5,0.05,2.5,0.01]; # In chloroform
+MixtureVolumes = [0,100,100,400,0]; # in microliters
+Molecular_Weights = [809.518,785.593,1300.712,697.578,710.34]
+
+# Number of Weights in mixture
+Weights = np.multiply(MixtureVolumes, Concentrations)
+# Percentage of moles in mixture
+WeightPercentages =  np.array(Weights) / np.sum(Weights) * 100
+
+Moles = np.array(Weights)/np.array(Molecular_Weights)
+MolePercentages = np.array(Moles) / np.sum(Moles) *100
+np.set_printoptions(suppress=True, precision=5)
+
+print('Moles')
+print(Moles)
+print('Weights')
+print(Weights)
+# Percentage of moles in mixture
+print('weight Percentages')
+print(np.round(WeightPercentages,2))
+print('Mole Percentages')
+print(np.round(MolePercentages,2))
+
+#+END_SRC
+
+#+RESULTS:
+: Hello,world
+: Moles
+: [0.      0.31823 0.00384 1.43353 0.     ]
+: Weights
+: [   0.  250.    5. 1000.    0.]
+: weight Percentages
+: [ 0.   19.92  0.4  79.68  0.  ]
+: Mole Percentages
+: [ 0.   18.13  0.22 81.65  0.  ]
+
+
+** Osmolarity Calculations
+
+#+BEGIN_SRC python :results output
+import numpy as np
+print("Hello,world")
+
+#%% Let's make water and glucose/sucrose mixtures
+Chemicals = ['water','glucose','sucrose']
+Concentrations = [0,0.25,0.25]; # In chloroform
+MixtureVolumes = [500,200,00]; # in microliters
+Molecular_Weights = [00,180.16,342.3]
+
+# Net osmolarity
+Osmolarity = np.sum(np.multiply(MixtureVolumes, Concentrations))/np.sum(MixtureVolumes)
+
+np.set_printoptions(suppress=True, precision=5)
+
+print('Osmolarity')
+print(Osmolarity)
+print(np.round(Osmolarity,3))
+
+#+END_SRC
+
+#+RESULTS:
+: Hello,world
+: Osmolarity
+: 0.07142857142857142
+: 0.071
+
+
+
+* Work Diary
 ** Goal of experiments
 The goal is to build GUVs and SUVs which are large in size. 
 
@@ -129,51 +232,6 @@ For the vesicle solution we use the DOPC+NBD-DoTAP medium where 80 ul of 2.5 mg/
 
 60 ul of this fluid was deposited on a ITO slide and left for drying in vacuum overnight after covering it in foil to prevent photo-bleaching. 
 
-
-#+BEGIN_SRC python :results output
-import numpy as np
-print("Hello,world")
-
-#%% Let's make 90% charged DOTAP-DOPC (Positive, non-fluoroscent)
-Chemicals = ['DOPS','DOPC','LissRhod-PE', 'DOTAP', 'NBD-DOTAP']
-Concentrations = [2.5,10,0.05,2.5,0.01]; # In chloroform
-MixtureVolumes = [0,85,15,0,0]; # in microliters
-Molecular_Weights = [809.518,785.593,1300.712,697.578,710.34]
-
-# Number of Weights in mixture
-Weights = np.multiply(MixtureVolumes, Concentrations)
-# Percentage of moles in mixture
-WeightPercentages =  np.array(Weights) / np.sum(Weights) * 100
-
-Moles = np.array(Weights)/np.array(Molecular_Weights)
-MolePercentages = np.array(Moles) / np.sum(Moles) *100
-np.set_printoptions(suppress=True, precision=5)
-
-print('Moles')
-print(Moles)
-print('Weights')
-print(Weights)
-# Percentage of moles in mixture
-print('weight Percentages')
-print(np.round(WeightPercentages,2))
-print('Mole Percentages')
-print(np.round(MolePercentages,2))
-
-#+END_SRC
-
-#+RESULTS:
-: Hello,world
-: Moles
-: [0.      1.08199 0.00058 0.      0.     ]
-: Weights
-: [  0.   850.     0.75   0.     0.  ]
-: weight Percentages
-: [ 0.   99.91  0.09  0.    0.  ]
-: Mole Percentages
-: [ 0.   99.95  0.05  0.    0.  ]
-
-
-
 ***  October  1, 2024, Tuesday
 We aim to make at least two columns in the same PDMS spacer plate so that we have a slightly higher throughput of at least two samples in one electroformation. 
 
@@ -266,14 +324,7 @@ Electroformation will be done for 3 hours at 6 Vpp 50 Hz (It should be 6Vpp 10 H
 **  November  8, 2024, Friday
 We performed the experiment to compare the pressure applied by the motion of vertical stage with the pressure applied by the syringe pump and also to calibrate the two. 
 
-We observed that the pressure applied 
-
-|-------|
-|       |
-| 2.527 |
-| 2.417 |
-
-0.11 +- 0.02 V corresponds to 2cm of water column height or 196 Pascals or 1.96 mBar. 
+We observed that the pressure applied has significant voltage change. 0.11 +- 0.02 V corresponds to 2cm of water column height or 196 Pascals or 1.96 mBar. 
 Correspondingly, for a change in volume of 10 microliters, the pressure change is 0.04 +- 0.01 V or around 70 +- 10 Pascals.
 volume in the griener tube (15ml) is around 5 ml and 10+ml is empty. 
 **  November 11, 2024, Monday
@@ -304,8 +355,8 @@ I have done: made a new chamber with a better design, and dip the pipettes in BS
 |-------------+---------------+--------+--------------|
 | Chemical    | concentration | volume | Mole percent |
 |-------------+---------------+--------+--------------|
-| DOPC        | 10 mg/ml      | 85 ul |       99.95% |
-| LissRhod-PE | 0.05mg/ml     | 15 ul |        0.05% |
+| DOPC        | 10 mg/ml      | 85 ul  |       99.95% |
+| LissRhod-PE | 0.05mg/ml     | 15 ul  |        0.05% |
 |             |               |        |              |
 With this concentration, I have prepared solutions for drying, which I will dry daily. 
 Moreover, I have dipped pipettes in BSA as well. 
@@ -323,3 +374,170 @@ GM3 solution which was dried up, was added as well. To the dried solution, 1 ml 
 
 **  November 27, 2024, Wednesday
 Testing a new protocol so leaving the electroformation of 45 ul deposited lipids at 500 Hz and 10 Volts overnight. 
+I need to look at it in microscope to check where all and how many vesicles have grown inside the chamber at 20x.
+Vesicles are formed in bulk. 
+Then the system is transferred into a methyl cellulose solution. 0.15 mg in 10 ml stock solution.
+
+
+
+captured001&2   - 1. 100 ul in 300 ul water
+captured003&4   - 2. 300 ul of sucrose added
+captured005&6   -  300 ul of mc in water on vesicles in water
+
+**  November 29, 2024, Friday
+
+
+
+
+**  December  2, 2024, Monday
+2 October data worked well. 
+
+|--------------------------------------------------------+--------------------------------------------|
+| Method                                                 | Works/doesn't                              |
+|--------------------------------------------------------+--------------------------------------------|
+| Storing vesicles at 4 degrees                          | works but size reduces                     |
+| reusing syringe filter over a week                     | need to establish, seems to work           |
+| syringe filtered water/solutions                       | works                                      |
+| without hellmanex cleaning, use only ethanol and water | works                                      |
+| water from kitchen  - DD H2O                           | works                                      |
+| 6 Volts 50 Hz old spacer old solution                  | works                                      |
+| ice storage                                            | works well. without it expt fails          |
+| Glucose/sucrose in fridge                              | works over a week                          |
+| Prepared vesicle solution                              | works over a week                          |
+| BSA concentration                                      | works well                                 |
+| spacer                                                 | Old ones work, New ones don't seem to work |
+| Hellmanex cleaning                                     | Can't establish doesn't seem to work       |
+| 2 Volts 10 Hz                                          | works                                      |
+| 10 Volts 500 Hz                                        | Can't establish doesn't seem to work       |
+| DOPC only solution                                     | works                                      |
+| DOPS-DOPC solution                                     | seems to work well                         |
+| keeping deposited lipid solution over a few days       | seems to work well, even over months       |
+| Current BSA solution pipette dipping                   | pipette breaks often                       |
+|                                                        |                                            |
+
+So, I will establish a strict protocol for working, which involves using specific syringes and filters and sources of water.
+Preparing solutions over fixed days of week and storing and making lipid solutions and deposition. 
+I aim to do minimum work and get maximum output rate for data. 
+
+
+**  December  3, 2024, Tuesday
+Need to prepare vesicles quickly. I think what I am observing is just gentle hydration although I can't verify that for now. 
+I should first look at some protocols in literature, in papers and then implement a few new things. 
+I will make new stock solutions using chloroform as well. 
+I need to prepare DOTAP-DOPC, DOPC-DOPS and DOTAP-AOT solutions. 
+2 Volts 20 Hz is what he recommends but let me cross-check with spacer distance. 
+I need to make fluctuating and large vesicles. 
+
+|-------------+---------------+--------+--------------|
+| Chemical    | concentration | volume | Mole percent |
+|-------------+---------------+--------+--------------|
+| DOPC        | 2.5 mg/ml     | 300 ul | 88.5 %       |
+| DOPS        | 2.5 mg/ml     | 40 ul  | 11.45 %      |
+| LissRhod-PE | 0.05mg/ml     | 15 ul  | 0.05 %       |
+|             |               |        |              |
+
+
+** December  7, 2024, Saturday
+With 0.25 Molar Sucrose buffer, 1mm spacer and 2Volt 10 Hz condition under 3 hours, vesicles were formed. 
+Vesicles still have minor tubules hanging. Size and flicker is good. We need to dilute the solution and be able to clean the vesicles. Dilution of 15 ul of solution in 600 ul of glucose is still high. Need to use 5 ul only after dilution. Enough solution exists for a week. 
+
+Further things to probe: 
+Try 2 Volt 10 Hz, reduce concentration of solution further and also swell for 30 mins before electroformation.
+Need to prepare some vesicle solution every day and keep on testing and improving.
+
+
+**  December  9, 2024, Monday 
+Need to make more vesicle deposited plates. 
+Swell for 30 mins before electroformation. 
+Try transfer of vesicle from one solution to another. 
+
+
+**  January  2, 2025, Thursday  8:42 AM
+So, we have 100% concentration and 50% concentration of the lipid DOPC by diluting in chloroform. 
+*** Electroform at 2 Volts 10 Hz
+Started at 10.25 am. 
+Test in sample holder. Order sample holder? 
+
+**  January  3, 2025, Friday
+I could, today, build more vesicles and test older vesicles. At the same time, I can automate the syringe pump function. 
+I need to build the DOPC-DOPS vesicles firstly. 
+It has been noticed that their size reduces over time with storage. I can try to verify that and characterize that. 
+
+For 20 ul of sample of vesicles in 800 ul of media, there are a lot of smaller vesicles and many larger ones. 
+
+Actual experimental vessel volume is 600 ul. 
+
+We need to figure out how to vary the osmolarity in this 600 ul vessel. And then characterize it as well. 
+
+The Electroformation worked well at 2 Volts 10 Hz for thinner spacer but failed for thicker spacer for some reason. 
+
+It appears that vesicles stay larger in size when prepared freshly and then shrink over time when stored, which is 
+
+**  January 9, 2025, Thursday SUVs Glucose
+
+NBD-DoTAP solution was diluted by adding 6 ul of 1 mg/ml solution to 600 ul of chloroform. 
+600 ul of solution of DoTap was prepared and deposited 100 ul each into 6 tubes. 
+
+
+|-----------+---------------+---------+--------------|
+| Content   | Concentration | Volume  | Mole percent |
+|-----------+---------------+---------+--------------|
+| DOPC      | 2.5 mg/ml     | 100 ul  |        18.2% |
+| DOTAP     | 2.5 mg/ml     | 400  ul |        81.8% |
+| NBD-DoTAP | 0.01 mg/ml    | 100 ul  |              |
+|           |               |         |              |
+|-----------+---------------+---------+--------------|
+
+This solution was left for drying after covering at air pressure. 
+
+**  January 16, 2025, Thursday
+We syringe filter 0.25 glucose solution and pass 1ml of it through the 
+
+
+**  January 21, 2025, Tuesday
+NBD-DoTAP SUV solution has to be detected fluorescently. 463/536 nm is the absorption/emission spectrum and quantum efficiency is 10-30%. 
+Now, we excite with 460 nm and use a lower intensity of around 10% for a start. 
+
+Then we use triple filter which has transmission around: 450-470, 530-550, 620-640 nm.
+
+I have realised that since I don't have two dyes as of now, I will simply incorporate LissRhod into my SUVs and observe the Biomembrane without fluorescence. 
+Then, as it becomes more fluorescent, I will be able to study the presence of oppositely charged SUVs in my main system. 
+
+In the mean time, we will study and order another dye which can actually do FRET and read more about FRET as well. 
+
+
+**  January 31, 2025, Friday
+Preparation for Fluorescent SUVs (Positively charged) and non-fluorescent GUVs (negatively charged) samples.
+SUVs in Glucose 0.25 Molar solution, GUVs in Sucrose 0.25 Solution
+Pipette preparation for experiment.
+**** TODO Clean the extrusion setup
+**** TODO BSA coating will be done by dipping 6-10 micron pipette overnight. 
+*** Fluorescent SUV preparation
+Liss-Rhod PE will be added to DOTAP SUV solution which will be left for drying overnight in a centrifuge tube. 
+Concentrations used will be as follows:
+
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+| DOPC        | 2.5 mg/ml     | 100 ul  |        18.1% |
+| DOTAP       | 2.5 mg/ml     | 400  ul |        81.7% |
+| LissRhod-PE | 0.05 mg/ml    | 100 ul  |         0.2% |
+|             |               |         |              |
+|-------------+---------------+---------+--------------|
+
+After this, the media will be added and centrifugation will be followed by extrusion. 
+Extrusion setup has to be cleaned in Chloroform. 
+Only extrude at time of use. Media of Sucrose can be used to settle the vesicle at the bottom and detect. 
+For fusion experiment, settle the vesicle in glucose.  
+
+*** GUVs of DOPS-DOPC preparation
+We will leave the DOPC-PS mixture for drying overnight. 
+|----------+---------------+--------+--------------|
+| Chemical | concentration | volume | Mole percent |
+|----------+---------------+--------+--------------|
+| DOPC     | 2.5 mg/ml     | 300 ul | 88.5 %       |
+| DOPS     | 2.5 mg/ml     | 40 ul  | 11.5 %       |
+|----------+---------------+--------+--------------|
+
+Deposit 50 ul of solution onto the ITO slide. 
+Swelling for 30 mins followed by electroformation at 2 Volts 20 Hz. 
