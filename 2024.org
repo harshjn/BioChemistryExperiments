@@ -3,14 +3,15 @@
 * Fluorescence
 What is epifluorescence, burner lamp and DIA in microscope facility?
 
-Microscope facility
-|--------+-------------------+---------------+-----------------|
-| Laser  | wavelength | emission peak | absorption peak |
-|--------+-------------------+---------------+-----------------|
-| DAPI   | 405 nm            |           358 |             461 |
-| FITC   | 488 nm            |           495 |             519 |
-| Yellow | 543 nm            |               |                 |
-| Red    | 633 nm            |               |                 |
+Microscope facility in ELC Lab 2/Shashi:
+
+|----------+------------+-----------------+---------------|
+| Channel  | wavelength | absorption peak | emission peak |
+|----------+------------+-----------------+---------------|
+| DAPI     | 405 nm     | 358 nm          | 461 nm        |
+| FITC     | 488 nm     | 495 nm          | 519 nm        |
+| Yellow   | 543 nm     |                 |               |
+| Nile Red | 633 nm     | 552 nm          | 636 nm        |
 
 * Terminal commands:
 
@@ -31,10 +32,10 @@ import numpy as np
 print("Hello,world")
 
 #%% Let's make 90% charged DOTAP-DOPC (Positive, non-fluoroscent)
-Chemicals = ['DOPS','DOPC','LissRhod-PE', 'DOTAP', 'NBD-DOTAP']
+Chemicals = ['DOPS','DOPC','LissRhod-PE', 'Cholesterol', 'NBD-DOTAP']
 Concentrations = [2.5,2.5,0.05,2.5,0.01]; # In chloroform
-MixtureVolumes = [0,100,100,400,0]; # in microliters
-Molecular_Weights = [809.518,785.593,1300.712,697.578,710.34]
+MixtureVolumes = [20,150,0,0,0]; # in microliters
+Molecular_Weights = [809.518,785.593,1300.712,386.65,710.34]
 
 # Number of Weights in mixture
 Weights = np.multiply(MixtureVolumes, Concentrations)
@@ -60,16 +61,43 @@ print(np.round(MolePercentages,2))
 #+RESULTS:
 : Hello,world
 : Moles
-: [0.      0.31823 0.00384 1.43353 0.     ]
+: [0.06177 0.47735 0.      0.      0.     ]
 : Weights
-: [   0.  250.    5. 1000.    0.]
+: [ 50. 375.   0.   0.   0.]
 : weight Percentages
-: [ 0.   19.92  0.4  79.68  0.  ]
+: [11.76 88.24  0.    0.    0.  ]
 : Mole Percentages
-: [ 0.   18.13  0.22 81.65  0.  ]
+: [11.46 88.54  0.    0.    0.  ]
 
 
 ** Osmolarity Calculations
+
+
+
+#+BEGIN_SRC python :results output
+  import numpy as np
+  print("Hello,world")
+
+  #%% Let's make water and glucose/sucrose mixtures
+  Molecular_Weights = [00,180.16,342.3]
+  Weight = 180.16/4*80e-3 #g
+  Volume = 80e-3 #ml
+  # Net osmolarity
+  Osmolarity = Weight/Volume/Molecular_Weights[1];
+
+  np.set_printoptions(suppress=True, precision=5)
+  print(f'{Weight} grams in {Volume*1e3} ml')
+  print(f'Osmolarity: {Osmolarity}')
+  print(np.round(Osmolarity,3))
+
+#+END_SRC
+
+#+RESULTS:
+: Hello,world
+: 3.6032 grams in 80.0 ml
+: Osmolarity: 0.25
+: 0.25
+
 
 #+BEGIN_SRC python :results output
 import numpy as np
@@ -78,59 +106,47 @@ print("Hello,world")
 #%% Let's make water and glucose/sucrose mixtures
 Chemicals = ['water','glucose','sucrose']
 Concentrations = [0,0.25,0.25]; # In chloroform
-MixtureVolumes = [500,200,00]; # in microliters
+MixtureVolumes = [80,00,00]; # in milliliters
 Molecular_Weights = [00,180.16,342.3]
 
 # Net osmolarity
 Osmolarity = np.sum(np.multiply(MixtureVolumes, Concentrations))/np.sum(MixtureVolumes)
 
-np.set_printoptions(suppress=True, precision=5)
-
-print('Osmolarity')
-print(Osmolarity)
-print(np.round(Osmolarity,3))
-
-#+END_SRC
-
-#+RESULTS:
-: Hello,world
-: Osmolarity
-: 0.07142857142857142
-: 0.071
-
-
-
-* Work Diary
+np.set_printoptions(suppr* Work Diary
 ** Goal of experiments
 The goal is to build GUVs and SUVs which are large in size. 
 
 ** Available solutions and their concentrations
 
 Using the protocol previously made on 29 July 2024. 
-|---------------+------------------+---------------+---------|
-| Content       | Molecular weight | Concentration |     Qty |
-|               |            grams |         mg/ml | g or ml |
-|---------------+------------------+---------------+---------|
-| DOPS          |          809.518 |           2.5 |     1.5 |
-| DOPS (Powder) |                  |         25 mg |         |
-| DOPC          |          785.593 |            10 |     inf |
-| LissRhod-PE   |         1300.712 |          5 mg |     inf |
-| DOTAP         |          697.578 |           2.5 |      14 |
-| NBD-DOTAP     |           710.34 |             1 |     1.5 |
-| NBD-DOTAP     |           710.34 |          0.01 |     1.5 |
-| GM3           |                  |               |         |
-| AOT           |                  |               |    25 g |
-|---------------+------------------+---------------+---------|
-|               |                  |               |         |
+|-------------+------------------+---------------+---------+----------|
+| Content     | Molecular weight | Concentration | Qty     | Position |
+|             |            grams | mg/ml         | g or ml |          |
+|-------------+------------------+---------------+---------+----------|
+| DOTAP       |          697.578 | 2.5           | 5 ml    | 1,6      |
+| DOPS        |          809.518 | 2.5           | 5 ml    | 2,7      |
+|             |                  |               |         |          |
+| LissRhod-PE |         1300.712 | Liquid        | inf     | 3,8      |
+| Cholesterol |           386.65 | Powder        | inf     | 4,9      |
+| DOPC        |              786 | Powder        | 200 mg  | 5        |
+|             |                  |               |         |          |
+| NBD-DOTAP   |           710.34 | 1             | 1.5     |          |
+| NBD-DOTAP   |           710.34 | 0.01          | 1.5     |          |
+| GM3         |                  |               |         |          |
+| AOT         |           444.56 |               | 25 g    |          |
+|             |                  |               |         |          |
+|-------------+------------------+---------------+---------+----------|
 
 Sources:
 MW: [809.518,785.593,1300.712,697.578,710.34]
-https://avantilipids.com/product/840035
-https://avantilipids.com/product/850375
-https://avantilipids.com/product/810150
-https://avantilipids.com/product/890890
-https://www.medchemexpress.com/fluorescent-dotap.html
-AOT: https://www.sigmaaldrich.com/IN/en/product/aldrich/323586
+DOPS:https://avantilipids.com/product/840035  Mw: 810
+DOPC: https://avantilipids.com/product/850375 Mw: 786
+LissRhod-PE:https://avantilipids.com/product/810150 Mw: 1300
+DoTAP: https://avantilipids.com/product/890890 Mw: 698
+NBD-DoTAP: https://www.medchemexpress.com/fluorescent-dotap.html Mw: 710
+AOT: https://www.sigmaaldrich.com/IN/en/product/aldrich/323586 Mw: 444.56
+Cholesterol: https://www.sigmaaldrich.com/IN/en/product/sigma/c8667 Mw:386.65
+HydroxyCholesterol: https://avantiresearch.com/product/700021 Mw: 402.35
 
 ** Protocol-Experiments: August - GUV-f
 We aim to make Fluorescent GUVs with DOPS and DOPC, and Liss-Rhod-PE
@@ -485,14 +501,12 @@ NBD-DoTAP solution was diluted by adding 6 ul of 1 mg/ml solution to 600 ul of c
 | DOPC      | 2.5 mg/ml     | 100 ul  |        18.2% |
 | DOTAP     | 2.5 mg/ml     | 400  ul |        81.8% |
 | NBD-DoTAP | 0.01 mg/ml    | 100 ul  |              |
-|           |               |         |              |
 |-----------+---------------+---------+--------------|
 
 This solution was left for drying after covering at air pressure. 
 
 **  January 16, 2025, Thursday
 We syringe filter 0.25 glucose solution and pass 1ml of it through the 
-
 
 **  January 21, 2025, Tuesday
 NBD-DoTAP SUV solution has to be detected fluorescently. 463/536 nm is the absorption/emission spectrum and quantum efficiency is 10-30%. 
@@ -519,10 +533,9 @@ Concentrations used will be as follows:
 |-------------+---------------+---------+--------------|
 | Content     | Concentration | Volume  | Mole percent |
 |-------------+---------------+---------+--------------|
-| DOPC        | 2.5 mg/ml     | 100 ul  |        18.1% |
-| DOTAP       | 2.5 mg/ml     | 400  ul |        81.7% |
-| LissRhod-PE | 0.05 mg/ml    | 100 ul  |         0.2% |
-|             |               |         |              |
+| DOPC        | 2.5 mg/ml     | 50 ul   |        18.1% |
+| DOTAP       | 2.5 mg/ml     | 200  ul |        81.7% |
+| LissRhod-PE | 0.05 mg/ml    | 50 ul   |         0.2% |
 |-------------+---------------+---------+--------------|
 
 After this, the media will be added and centrifugation will be followed by extrusion. 
@@ -535,9 +548,1258 @@ We will leave the DOPC-PS mixture for drying overnight.
 |----------+---------------+--------+--------------|
 | Chemical | concentration | volume | Mole percent |
 |----------+---------------+--------+--------------|
-| DOPC     | 2.5 mg/ml     | 300 ul | 88.5 %       |
-| DOPS     | 2.5 mg/ml     | 40 ul  | 11.5 %       |
+| DOPC     | 2.5 mg/ml     | 150 ul | 88.5 %       |
+| DOPS     | 2.5 mg/ml     | 20 ul  | 11.5 %       |
 |----------+---------------+--------+--------------|
 
 Deposit 50 ul of solution onto the ITO slide. 
 Swelling for 30 mins followed by electroformation at 2 Volts 20 Hz. 
+
+**  February  1, 2025, Saturday
+
+*** DONE Electroformation in sucrose 0.25M for 3 hours
+
+*** DONE Extrusion of one sample in glucose and one sample in sucrose 
+ 1 hour. Cleaning the membrane
+
+*** DONE prepare glucose solution
+syringe filtering
+
+*** observations
+To 100 ul of glucose base solution, 2 ul of sucrose vesicles were added. Following this, 2 ul of glucose SUV-F were added. 
+We observed significant intensity of SUVs and fusion rates. 5 ul of glucose SUV-F added turned out to be too much. 
+So, we will work at concentrations of less than 2ul SUV-F in 100 ul of glucose. 
+
+** Expt: Calculate the fusion rate with tension in the membrane
+
+*** We need to make sure that the tension is controllable accurately. We need a visco-elastic plot for stress versus strain
+There is still a little problem here, so we need to standardize it again. We should have consistent bursting tension and we should have consistent dependence of strain rate with bursting tension as well. 
+
+*** We can also establish how the bursting tension varies as we go from DOPC to DOPS vesicles. 
+
+*** We need to flow dilute SUVs at a slow rate while the tension is applied, and measure the shift in equilibrium position, as well as 
+We need to establish the count of SUVs in the medium, before and after dilution and test it via DLS. 
+
+
+**  March  3, 2025, Monday
+
+***  4:06 PM Using the old DOPC & DOPS stocks deposition was done
+Fluorescent DOPC - 40 ul was deposited
+UnFluoresced DOPC-PS 20 ul was deposited
+
+BSA solution was prepared - 180 mg in 10 ml water
+Pipettes were dipped into this system. 
+
+**  March  5, 2025, Wednesday
+
+**  March 10, 2025, Monday
+DOPC deposited slide was submerged in water for an hour. 
+After this, electroformation at 2 Volts 20 Hz was done for 3 hours. Electroformation medium was 0.25 M sucrose. 
+
+Sucrose solution of 1 Molarity (approx) was prepared by adding 3.42 g of sucrose to 11 ml (net, with sucrose) volume of water. 
+
+**  March 11, 2025, Tuesday
+I observed that the DOPC got doped with dye but the DOPS/PC vesicles are free from dye contamination. 
+DOPC strain rate measurement was done by holding at a constant force (Pressure differe
+
+**  March 18, 2025, Tuesday
+Today we are going to extrude SUVs. 
+
+SUV solution was diluted and intensity was measured. 
+
+Diluted SUV solution: We took the raw SUV solution and added 50 microliters of SUV solution to 1 ml of glucose (0.25 M). 
+
+Then we added 10 microliters of it to 20 microliter glucose vessel with 2.5 microliters of raw DOPS-PC vesicles. 
+
+We took data for one hour during which we observed the increase in membrane intensity. 
+
+There was no shift in the PH-Channel and Rhodamine-Channel. 
+
+Then we added another 10 microliters of diluted SUV solution to the vessel after removing 10 microliters of solution. 
+
+**  March 20, 2025, Thursday
+
+We created a mixture of 3 different compositions of AOT and DOPC. 
+
+The DOPC and AOT mixtures are as follows:
+
+|---------------+------------+-------------|
+| Sample number | AOT Volume | DOPC Volume |
+|---------------+------------+-------------|
+| Sample 1      |         90 |          10 |
+| Sample 2      |         50 |          50 |
+| Sample 3      |         10 |          90 |
+|               |            |             |
+
+Electroformation for 100% AOT sample was started at 12.30 after 20 minutes of swelling the vesicles. 
+
+
+
+**  April  8, 2025, Tuesday
+*** AOT membrane vesicle preparation
+AOT concentrations of around 1 % molarity, mixed with DOPC and without fluorescence to be prepared. 
+Then fluorescent label will be input in the environment as SUV. 
+AOT below CMC can be input into the environment/medium. 
+
+
+|-------------------+---------------+----------------+--------------|
+| Content           | Concentration | Volume         | Mole percent |
+|-------------------+---------------+----------------+--------------|
+| DOPC-AOT Sample 1 | 10 - 10 mg/ml | 99.4 - 0.6  ul | 1%    AOT    |
+| DOPC-AOT Sample 2 | 10 - 10 mg/ml | 98 - 2 ul      | 3.5 % AOT    |
+| DOPC-AOT Sample 3 | 10 - 10 mg/ml | 90 - 10        | 16.4% AOT    |
+|                   |               |                |              |
+|-------------------+---------------+----------------+--------------|
+
+ 12:18 PM Sample 1,2,3 left for drying overnight
+          DOPS 11% sample left for drying as well. 
+
+DOPS-DOPC concentration is as follows and leftover old solution was used from 31/1/25.  
+|----------+---------------+--------+--------------|
+| Chemical | concentration | volume | Mole percent |
+|----------+---------------+--------+--------------|
+| DOPC     | 2.5 mg/ml     | 150 ul | 88.5 %       |
+| DOPS     | 2.5 mg/ml     | 20 ul  | 11.5 %       |
+|----------+---------------+--------+--------------|
+
+
+
+*** PEG Coating instead of BSA
+|----------+----------|
+| Contents | quantity |
+|----------+----------|
+| PEG 3300 | 100mg    |
+| PEG 6000 | 50 mg    |
+| PEG 8000 | 50 mg    |
+| Water    | 10 ml    |
+|----------+----------|
+
+Source: https://claude.ai/share/24f1ab2d-b7db-4013-8982-20dc466a70ff
+PEG is commonly used in vesicle aspiration experiments. Researchers frequently employ PEG coatings on micropipettes and other glass surfaces for several reasons:
+
+Prevention of non-specific adhesion: PEG's ability to reduce interactions with both positively and negatively charged vesicles makes it particularly valuable in aspiration studies where maintaining vesicle mobility is critical.
+Reproducibility: PEG coatings help ensure consistent experimental conditions by minimizing variability in vesicle-surface interactions, which is essential for quantitative mechanical measurements.
+Compatibility with diverse lipid compositions: As you're experiencing in your work with both AOT and DOTAP vesicles, experiments often involve multiple lipid types with varying charges. PEG accommodates this diversity.
+Stability: PEG coatings tend to be stable over the timeframe of typical aspiration experiments, reducing the need for recoating during experimental sessions.
+Well-established protocols: The use of PEG in membrane biophysics is well-documented, with established protocols for effective coating procedures.
+
+In the literature, you'll find PEG coatings mentioned in papers by prominent groups working on membrane mechanics, including work from labs like Evan Evans (who pioneered many aspiration techniques), David Needham, and others who have extensively studied vesicle mechanics.
+
+Combining different molecular weight PEGs is actually a great approach for coating micropipettes with narrow tips.
+Why a PEG Mixture Works Well
+Using a combination of different molecular weight PEGs provides better surface coverage. The smaller PEG molecules (PEG 3300) can penetrate and coat the narrowest regions of your pipette tip, while the larger molecules (PEG 6000 and 8000) create a more robust steric barrier in the wider sections. This creates a comprehensive coating throughout the entire pipette surface.
+Recommended PEG Mixture
+For a 10 ml solution that will effectively coat micropipettes with 5-10 micron tips:
+
+100 mg PEG 3300 (1% w/v) - coats the narrowest regions
+50 mg PEG 6000 (0.5% w/v) - provides intermediate coverage
+50 mg PEG 8000 (0.5% w/v) - creates the strongest steric barrier
+
+This gives you a total 2% w/v PEG solution with a balanced distribution of molecular weights.
+
+*** DOTAP SUV preparation
+We start with 2.5 mg/ml solution of DoTAP and add the Rh-PE to it. 
+Then we leave it for drying in autoclaved v-shaped 2 ml vial. 
+
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+| DOPC        | 2.5 mg/ml     | 50 ul   |        18.1% |
+| DOTAP       | 2.5 mg/ml     | 200  ul |        81.7% |
+| LissRhod-PE | 0.05 mg/ml    | 50 ul   |         0.2% |
+|-------------+---------------+---------+--------------|
+
+100 ul was left for drying in each vial. So total 3 vials were used. 
+
+
+**  April 16, 2025, Wednesday
+
+2.5mg/ml solution of cholesterol  and hydroxycholesterol are prepared. 
+
+Sample 1:
+|-------------+---------------+--------+--------------|
+| Content     | Concentration | Volume | Mole percent |
+|-------------+---------------+--------+--------------|
+| DOPC        | 2.5 mg/ml     | 247 ul |        78.6% |
+| DOPS        | 2.5 mg/ml     | 38  ul |        11.7% |
+| Cholesterol | 2.5 mg/ml     | 15 ul  |         9.7% |
+|-------------+---------------+--------+--------------|
+
+Sample 2:
+|-------------+---------------+--------+--------------|
+| Content     | Concentration | Volume | Mole percent |
+|-------------+---------------+--------+--------------|
+| DOPC        | 2.5 mg/ml     | 265 ul |          80% |
+| AOT         | 2.5 mg/ml     | 19  ul |          10% |
+| Cholesterol | 2.5 mg/ml     | 16 ul  |          10% |
+|-------------+---------------+--------+--------------|
+
+Sample 3:
+|---------------------+---------------+--------+--------------|
+| Content             | Concentration | Volume | Mole percent |
+|---------------------+---------------+--------+--------------|
+| DOPC                | 2.5 mg/ml     | 264 ul |          80% |
+| AOT                 | 2.5 mg/ml     | 19  ul |          10% |
+| Hydroxy-Cholesterol | 2.5 mg/ml     | 17 ul  |          10% |
+|---------------------+---------------+--------+--------------|
+
+
+Pipettes that were previously forged were dipped into the PEG solution as well.
+
+**  April 17, 2025, Thursday
+At 10 o'clock, the pipettes were dipped in PEG.
+Electroformation needs to be started.  
+
+
+**  April 23, 2025, Wednesday
+PDMS was prepared by using 30-40 grams of elastomer and adding 10% of cross-linker to it and adding it to 20mm base container.
+
+Glucose (MW:180.16) solution of 0.25 Molarity and 200 ml was prepared by adding 9.01 grams of glucose to 200 ml of water approximately. 
+
+
+Pipettes were forged with less than 10 micron tip diameter. 
+
+For electroformation tomorrow:: DOPC-PS-U, AOT-PC-Chol-U, DOPS-PC-Chol-U, DOPC-AOT-HChol-U were deposited on 4 slides. 
+
+6 pipettes need to be dipped. 3 in PEG and 3 in BSA, after syringe filtering. 
+
+**  April 23, 2025, Wednesday
+SUV formation and
+
+**  April 24, 2025, Thursday
+
+|-------------+---------------+--------+--------------|
+| Content     | Concentration | Volume | Mole percent |
+|-------------+---------------+--------+--------------|
+| DOPC        | 2.5 mg/ml     | 247 ul |        83.5% |
+| DOPS        | 2.5 mg/ml     | 38  ul |        12.4% |
+| Cholesterol | 2.5 mg/ml     | 6 ul   |           4% |
+|-------------+---------------+--------+--------------|
+
+
+**  April 25, 2025, Friday
+In order to ensure that vesicles don't have too much tension and have enough access area, the vesicles with 0.25 M Sucrose were surrounded with 0.35 M Glucose. Tested with BSA. ( Can repeat with 0.30 M and BSA. )
+0.5 ml of SUV solution (0.25 M) was taken and added to it was 1 M glucose to make final molarity 0.35 M as well. 
+10 ul of 
+
+
+**  April 26, 2025, Saturday
+Experimental protocol
+
+|-----------------------------------------------+---------+---------------------+------+-----------------|
+| Protocol Steps/ List of tasks                 | time    | advance preparation | Date | Microscope Time |
+|-----------------------------------------------+---------+---------------------+------+-----------------|
+| Set the solution molarity of chamber (0.30 M) | 20 mins |                     |      |                 |
+| BSA coated pipette                            |         | 2 hours             |      |                 |
+| Add vesicles 1 ul electroformed solution      |         | 2 hours             |      |                 |
+|                                               |         |                     |      |                 |
+| Prepare SUV with same molarity solution       |         |                     |      |                 |
+| Record photos/videos                          |         |                     |      |                 |
+|                                               |         |                     |      |                 |
+|                                               |         |                     |      |                 |
+| Pressure calibrate                            |         |                     |      |                 |
+| Confirm no leakages and stable pressure       |         |                     |      |                 |
+|                                               |         |                     |      |                 |
+
+
+**  April 30, 2025, Wednesday
+We prepare stock solutions of DOPC and mix it with DOPS in the following concentration to prepare unfluoresced solution for DOPC-PS GUV. 
+We deposit 15 microliters of this solution on to an ITO. 
+
+Sometimes, vesicle doesn't burst and simply leads to 
+
+
+**  May 12, 2025, Monday
+Electroformation of this ITO above was performed and the solution is now free from contamination of liss-rhod.
+Electroformation was done via 1 hour of soaking and 3 hours of keeping electric field on. 
+Following this, before collection, bubble of air was used to detach the vesicles. 
+The yield at even a 15 microliter deposition of solution was quite good.
+
+**  May 15, 2025, Thursday 
+We deposit 15 ul of the solution onto the ITO plates. 
+Then, we dip a new pipette. 
+Finally, we dry up the SUV solution containing DoTAP and Liss-Rhod PE. 
+We will carry out the experiment tomorrow. 
+
+We re-use the PC-PS-U solution from 30 Apr. 
+
+*** For the SUV: 
+
+Created containers for Liss-Rhod and DoTAP. 
+
+
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+| DOPC        | 2.5 mg/ml     | 50 ul   |        18.1% |
+| DOTAP       | 2.5 mg/ml     | 200  ul |        81.7% |
+| LissRhod-PE | 0.05 mg/ml    | 50 ul   |         0.2% |
+|-------------+---------------+---------+--------------|
+
+**  May 17, 2025, Saturday
+1. Prepared 3 chambers via plasma cleaning.
+2. Used 0.6 ml of the SUV solution to form SUVs by extruding 10 cycles. 
+3. 
+
+
+**  May 23, 2025, Friday
+
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| DOPC        | 2.5 mg/ml     | 50 ul   |        18.1% |
+| DOTAP       | 2.5 mg/ml     | 200  ul |        81.7% |
+| LissRhod-PE | 0.05 mg/ml    | 50 ul   |         0.2% |
+|-------------+---------------+---------+--------------|
+
+We deposit 30 ul of the solution onto the ITO plates. 
+Then, we dip a new pipette. 
+Finally, we dry up 100 ul of SUV solution containing DoTAP and Liss-Rhod PE. 
+We will carry out the experiment tomorrow. 
+
+We re-use the PC-PS-U solution from 30 Apr for deposition on ITO.
+We need to prepare more of the PS-PC-U solution.
+We may need to order PC.
+
+**  May 30, 2025, Friday 
+We use the ITO plates with coated GUV solution and leave it dipped in 0.25 M Sucrose for 45 minutes and then electroform at 20 Hz 2 Volts for 2 hours. 
+We clean the SUV setup with Chloroform as well. 
+
+We will reuse the SUV solution made previously following extrusion. 
+
+We will make 3 chambers via plasma cleaning and sticking of glass. 
+
+
+*** ordered DOPC
+
+**  June  6, 2025, Friday
+Pipettes were dipped in PVA and 
+BSA solution: 30 mg in 10 ml, pipette coating works as well. 
+
+
+
+
+**  June 11, 2025, Wednesday
+We are going to test coatings:
+*** Mineral Oil with BSA 300/180
+*** 20 mg BSA in 10 ml
+*** 2 mg BSA in 10 ml
+*** Mineral Oil without any BSA
+*** PVA
+
+We realise that high forging is absolutely necessary to prevent leakages and bursting. So that only a single vesicle is held at a time and there are no flows around it. 
+
+We are trying to find minimum concentration of BSA that works.
+
+10 ul of PS-PC-U (unfluoresced) solution was deposited and is enough for making GUVs. 
+
+** June 12, 2025
+We use BSA concentration of 2 mg/10 ml BSA (Fraction 5) for coating the pipettes. 
+This is equivalent to molar concentration of 3 micro molars of BSA.
+For GUV formation, 15 ul of the PS-PC-5%Chol solution from April 24 was used.  
+For SUV formation, 
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| DOPC        | 2.5 mg/ml     | 50 ul   |        18.1% |
+| DOTAP       | 2.5 mg/ml     | 200  ul |        81.7% |
+| LissRhod-PE | 0.05 mg/ml    | 50 ul   |         0.2% |
+|-------------+---------------+---------+--------------|
+
+
+**  July  3, 2025, Thursday
+*** GUV and SUV formation:
+For GUV formation, 25 ul of the PS-PC-5%Chol solution from April 24 was deposited on ITO and left for drying overnight.  
+For SUV formation, 100 ul of the solution below is deposited into a vial and left for drying overnight. 
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| DOPC        | 2.5 mg/ml     | 50 ul   |        18.1% |
+| DOTAP       | 2.5 mg/ml     | 200  ul |        81.7% |
+| LissRhod-PE | 0.05 mg/ml    | 50 ul   |         0.2% |
+|-------------+---------------+---------+--------------|
+Then extrusion is done in glucose 0.25 M solution of quantity 1 ml. 
+
+*** SUV Dilution
+In order to dilute the SUV solution, 100 ul of the solution is added to 900 ul of glucose 0.25M. 
+
+
+*** Pressure Calibration:
+STD: 0.015
+t = 4.18, V = 7.10
+
+15 mm 7.50
+0 mm  7.40
+
+15 mm 7.55
+
+protocol:
+10 ul move and measure
+** Final Experiment 1: July 23, 2025
+*** Concentrations:
+1. Sucrose: 0.25 M syringe filtered  (3.44 g in 40 ml)
+2. Glucose: 0.25 M, 1.0 M syringe filtered (7.20 g in 40 ml for 1 M, 18.02 g in 400 ml for 0.25 M)
+3. BSA: 2 mg in 10 ml ( 3 micromolar solution)
+4. GUV Membrane concentration: PC-PS-Chol      (12% PS  - 5% Chol)
+5. SUV Membrane concentration: PC-TAP-LissRhod (80% TAP - 0.2% LissRhod)
+
+*** Protocols: 
+**** GUV
+ITO plates were washed in Hellmanex solution and alcohol. 
+The GUV membrane concentration is deposited on the ITO slide (10-15 ul). Following half to one hour of soaking the GUVs in order to swell them, electroformation is done for 3 hours at 20 Hz 2 Volts. 
+Thickness of ITO is 0.75 mm and Spacer thickness between the plates is varies from 0.7 to 1.2 mm, as measure by Vernier Callipers. 
+
+***** Dilution 
+From the original GUV solution, 10 ul of Solution was put into 1.5 ml solution of glucose (0.25M) in order to dilute it. 
+Then, from the diluted solution 10 ul was added to the sample. 
+
+**** SUV
+100 ul of SUV solution is left for drying overnight in a centrifuge tube. Then, 1 ml of glucose 0.25 M solution is added to it and mixed thoroughly.  
+Using chloroform, the extrusion setup is washed, dried and assembled. 
+SUV solution in 0.25 M glucose media is extruded for 10 cycles of extrusion in the setup. 
+Dilution of 100ul of SUV solution in 900 ul of Glucose 0.25 M solution is done further. 
+We therefore obtain around 10 ml of SUV solution which is then flown into the chamber.
+
+**** Pipette 
+***** Smoothness
+***** Diameter
+***** Coating
+Coating was done for at least 12 hours in the BSA solution. 
+
+**** Flow cell
+We obtain 10 ml of SUV solution, and 5-6 ml of it is filled into a 5 ml syringe. 
+The syringe is then connected to the PDMS chamber where a flow rate of 10-100 ul/min is set.
+In parallel another syringe is taking in liquid at the same flow rate. Experiment can last from 50-500 minutes accordingly. 
+
+**** GUV holding
+A dilute solution of GUV is added to the chamber where they settle to the bottom due to weight difference. 
+Following this, a pipette with slight negative pressure is used to hold and carry to the top. 
+
+**** Chamber and water flow line
+PDMS was stuck to glass slide washed with Hellmanex, using plasma cleaning.
+PVA coating was applied to the inner side.
+*** Calibrations
+
+**** Image Calibration
+**** Pressure Calibration
+***** Volume of chamber
+***** 
+**** SUV DLS results
+
+*** Standardisation
+**** Membrane characteristics: Tension, Rigidity
+**** Flow Characteristics of SUVs and Concentrations:
+
+*** Applying calibration to data
+
+*** Data Analysis Protocols
+
+*** Data Plots
+
+*** Observations
+*** Results
+
+
+**  July 27, 2025, Sunday
+Make the intensity of fluoresence signal stronger, so that weak fusion is also visible. 
+
+**  August 25, 2025, Monday
+
+1ml volume chamber of size 10mm X 20 mm X 5 mm. 700 ul around is added practically. With SUVs enterting on one end and exiting on the diagonally opposite one. SUV flow is maintained at the opposite ends. 
+
+GUV is held via low pressure very well forged pipette.
+In the absence of SUVs itself, extra area removal is observed due to shape of the pipette.  
+
+Pressure calibration via Syringe_control_programmatic is carried out as well. 
+
+Results: We obtain nearly 10% fusion. Described better in Results.txt in analysis folder in Data Storage. 
+
+**  August 27, 2025, Wednesday
+*** DOPC-Fusion experiment. 
+We now try to do the non-charged lipids experiment where the SUVs and GUVs are both made of DOPC only. 
+We will make a few concentrations, with and without 5% cholesterol, 10% cholesterol etc. 
+Should we put cholesterol in the SUVs as well? 
+
+
+GUV (500 ul) - 95% DOPC, 5% Chol
+|--------------+---------------+-------------|
+| GUV chemical | concentration | volume (ul) |
+|--------------+---------------+-------------|
+| DOPC         | 2.5 mg/ml     |         494 |
+| Cholesterol  | 10 mg/ml      |         6.5 |
+
+SUV (300 ul) 
+|--------------+---------------+-------------+--------|
+| SUV chemical | concentration | volume (ul) | Mole % |
+|--------------+---------------+-------------+--------|
+| DOPC         | 2.5 mg/ml     |       234.9 |   94.5 |
+| Cholesterol  | 10 mg/ml      |         3.1 |      5 |
+| Lissrhod-PE  | 0.05 mg/ml    |        62.1 |    0.5 |
+
+
+
+
+**  September 13, 2025, Saturday
+Today I am going to make GUVs with two different charge ratios.
+PC-PS-Chol. Both will have 5% cholesterol and the charges on SUVs will be the same, but higher concentration of Liss-Rhod.
+
+
+*** the 10% PS GUVs 
+|-------------+---------------+--------+--------------|
+| Content     | Concentration | Volume | Mole percent |
+|-------------+---------------+--------+--------------|
+| DOPC        | 2.5 mg/ml     | 247 ul |        83.5% |
+| DOPS        | 2.5 mg/ml     | 38  ul |        12.4% |
+| Cholesterol | 2.5 mg/ml     | 6 ul   |         4.1% |
+|-------------+---------------+--------+--------------|
+
+
+*** 25% PS GUVs
+|-------------+---------------+--------+--------------|
+| Content     | Concentration | Volume | Mole percent |
+|-------------+---------------+--------+--------------|
+| DOPC        | 2.5 mg/ml     | 214 ul |          70% |
+| DOPS        | 2.5 mg/ml     | 79  ul |          25% |
+| Cholesterol | 2.5 mg/ml     | 7.5 ul |           5% |
+|-------------+---------------+--------+--------------|
+
+
+*** SUVs
+
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| DOPC        | 2.5 mg/ml     | 40 ul   |        18.0% |
+| DOTAP       | 2.5 mg/ml     | 160  ul |        81.5% |
+| LissRhod-PE | 0.05 mg/ml    | 100 ul  |         0.5% |
+|-------------+---------------+---------+--------------|
+
+
+**  September 22, 2025, Monday
+***  9:08 AM
+1. Started Electroformation of 10% PS GUVs at 2 V 20 Hz. Also mixed SUVs with water for extrusion.
+2. Need to extrude SUVs
+3. prepare a chamber with 1 ml glucose and clean flow tubes. 
+
+
+I am doing it with certain concentrations. Now I need to do it for at least 4 different values of concentrations.
+
+Until it breaks. 
+
+***  11:14 AM
+0.042 cycle is about to complete. Next is 0.083 concentration cycle for SUVs.
+Held at constant pressure. 
+
+***  October 22, 2025, Wednesday
+
+Instead of 0.25M as I did previously, since I want my vesicles to lose a bit of water when they enter the medium, I can choose to start with lower inside, like 0.24 M and Glucose at a higher, like 0.26M concentration of Glucose. So that water will exit the vesicle to make inner concentration higher and bring it at equilibrium with the chamber. 
+
+1. Sucrose: 0.24 M syringe filtered  (3.29 g in 40 ml)
+2. Glucose: 0.26 M, 1.0 M syringe filtered (7.20 g in 40 ml for 1 M, 18.70 g in 400 ml for 0.26 M)
+
+As per the calculations listed below, 7.7% volume loss as well as on a timescale of 100 ms is expected. 
+https://claude.ai/share/b4a0c5d0-0ab3-4b7c-9421-f2a6a13cb8eb
+
+Now we are also interested in changing the volume in steps of 5% through osmolarity control. 
+Since we observe around 10% fusion of area or more, we may want this.
+| Step | Relative Volume | Vesicle Diameter (μm) | External Glucose (M) | Water to Add (μl) | Cumulative Volume (ml) |
+|------+-----------------+-----------------------+----------------------+-------------------+------------------------|
+|    0 |            1.00 |                  19.5 |                0.260 |                 0 |                  1.000 |
+|    1 |            1.05 |                  20.0 |                0.248 |                48 |                  1.048 |
+|    2 |            1.10 |                  20.5 |                0.236 |                50 |                  1.098 |
+|    3 |            1.15 |                  21.0 |                0.226 |                51 |                  1.149 |
+|    4 |            1.20 |                  21.5 |                0.217 |                52 |                  1.201 |
+|    5 |            1.25 |                  21.9 |                0.208 |                52 |                  1.253 |
+|    6 |            1.30 |                  22.4 |                0.200 |                53 |                  1.306 |
+
+**  October 27, 2025, Monday
+ 10:45 AM
+Started electroformation for the 25% DOPS deposited Lipid sample first dipping in water for half hour, and then electrical oscillations at 20 Hz, 2 Volts for 2 hours. 
+**  November 11, 2025, Tuesday  4:17 PM
+*** Chamber preparation
+Mix the PDMS at 5% crosslinker fraction. Make soft PDMS that is easy to cut. 
+
+ 
+*** Mix the GUV and SUV solutions
+
+**** 25% PS GUVs
+|-------------+---------------+--------+--------------|
+| Content     | Concentration | Volume | Mole percent |
+|-------------+---------------+--------+--------------|
+| DOPC        | 2.5 mg/ml     | 214 ul |          70% |
+| DOPS        | 2.5 mg/ml     | 79  ul |          25% |
+| Cholesterol | 2.5 mg/ml     | 7.5 ul |           5% |
+|-------------+---------------+--------+--------------|
+
+
+**** SUVs
+
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| DOPC        | 2.5 mg/ml     | 40 ul   |        18.0% |
+| DOTAP       | 2.5 mg/ml     | 160  ul |        81.5% |
+| LissRhod-PE | 0.05 mg/ml    | 100 ul  |         0.5% |
+|-------------+---------------+---------+--------------|
+
+100 ul will be deposited in the 1 ml pipette and left overnight for drying. 
+
+
+
+**  November 19, 2025, Wednesday
+I have prepared the chambers with the proper sticking. I have prepared SUV samples as well as forged pipettes. 
+Now, I plan to execute the experiment and data collection. 
+
+
+**  November 28, 2025, Friday
+**** 25% PS GUVs
+|-------------+---------------+--------+--------------|
+| Content     | Concentration | Volume | Mole percent |
+|-------------+---------------+--------+--------------|
+| DOPC        | 2.5 mg/ml     | 214 ul |          70% |
+| DOPS        | 2.5 mg/ml     | 79  ul |          25% |
+| Cholesterol | 2.5 mg/ml     | 7.5 ul |           5% |
+|-------------+---------------+--------+--------------|
+
+Leave ITO plates for drying with above concentration for Electroformation of GUVs. 
+Prepared the PDMS chambers. 
+
+**** SUVs
+Prepare the solution for SUVs
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| DOPC        | 2.5 mg/ml     | 40 ul   |        18.0% |
+| DOTAP       | 2.5 mg/ml     | 160  ul |        81.5% |
+| LissRhod-PE | 0.05 mg/ml    | 100 ul  |         0.5% |
+|-------------+---------------+---------+--------------|
+
+100 ul will be deposited in the 1 ml pipette and left overnight for drying. 
+
+
+**  December  2, 2025, Tuesday
+Performed expt with 0.2 and 0.5 Concentrations of DoTAP SUVs and 25% GUVs. 
+
+**  December  4, 2025, Thursday
+Today I will do the fusion experiment with 0.1 and 0.4 concentrations. 
+
+Dilute SUVs. 
+
+Hold the GUVs.
+
+
+* 2026
+
+**  January  3, 2026, Saturday
+We will make Glucose/Sucrose solutions today. And leave GUV/SUV lipid materials for drying. 
+
+
+Glucose: 0.26 M, 1.0 M syringe filtered (7.20 g in 40 ml for 1 M, 18.70 g in 400 ml for 0.26 M)
+Left SUVs for drying. 
+
+Made PDMS with 7.5 % of crosslinker in 38 grams (approx less than 40) of PDMS solution. 
+
+SUV drying, and keep stock of GUV/SUV solutions.
+
+|----------+-----------------|
+| Solution | Volume in stock |
+|----------+-----------------|
+| GUV 10%  | 50 ul           |
+| GUV 25%  | 200 ul          |
+| GUV 50%  | 0               |
+| SUV      | 100 ul          |
+
+
+Tomorrow I will dip the pipettes. 
+
+**  January 17, 2026, Saturday
+
+**** Dilution of PE-CF
+
+Take 1 ml (1mg/ml) bottle of PE-CF. 
+0.5 ml of this solution is added to around 2 ml of chloroform. 
+We dilute it to 0.2 mg/ml solution.
+
+**** Prepare the solution for SUVs
+|---------+---------------+---------+--------------|
+| Content | Concentration | Volume  | Mole percent |
+|---------+---------------+---------+--------------|
+|         |               |         |              |
+| DOPC    | 2.5 mg/ml     | 73 ul   | 19.0 %       |
+| DOPS    | 2.5 mg/ml     | 257  ul | 80  %        |
+| CF-PE   | 0.15 mg/ml    | 70 ul   | 1  %         |
+|         |               |         |              |
+|---------+---------------+---------+--------------|
+
+**** Drop SUV solution in vial. 
+
+100 ml of SUV solution is dropped in vial and left for drying overnight. 
+
+**** GUV solution leave for drying
+***** 25% PS GUVs
+|-------------+---------------+--------+--------------|
+| Content     | Concentration | Volume | Mole percent |
+|-------------+---------------+--------+--------------|
+| DOPC        | 2.5 mg/ml     | 214 ul |          70% |
+| DOPS        | 2.5 mg/ml     | 79  ul |          25% |
+| Cholesterol | 2.5 mg/ml     | 7.5 ul |           5% |
+|-------------+---------------+--------+--------------|
+
+Leave ITO plates for drying with above concentration for Electroformation of GUVs. 
+Prepared the PDMS chambers. 
+
+**** Dip pipettes. 
+Done
+**** Red SUV make. 
+Done. 0.5 ml made due to leakage. 
+
+**  January 18, 2026, Sunday
+**** Electroform GUV vesicles. 
+
+
+**  February  5, 2026, Thursday Pressure Calibration
+Using the pressure controller for microfluidic devices by Knowteq company, we did a calibration for our pressure sensor. The zero reference varies, Y = A*x + B
+where A = 0.993+-0.011
+and B = 6.406+-0.015 and B is the zero reference and can vary with the height adjustment. 
+In experiments it is around 8.6
+And x varies from -2 to +2.5 kPa. 
+Therefore, 1 Volt change leads to around 1 kPa change in pressure. 
+Also, assuming 0.05 as our measure of resolution, we end up with 50 Pascal measurement resolution. 
+Using this, we can estimate our volume as well.
+
+**  April  1, 2026, Wednesday
+
+
+1. Sucrose: 0.24 M syringe filtered  (3.29 g in 40 ml DI water)
+2. Glucose: 0.26 M(18.70 g in 400 ml for 0.26 M)
+3. Glucose: 1.0 M syringe filtered, (7.20 g in 40 ml water for 1 M)
+
+Also, pulled the new pipettes. 
+
+Syringe filtration. 
+
+Made PDMS with 7.5 % of crosslinker in 38 grams (approx less than 40) of PDMS solution. 
+
+
+
+**  April  3, 2026, Friday
+After this, cleaning of ITO Plates with Hellmanex solution in boiling water.
+Deposited the GUV solution and left for drying overnight in vacuum. 
+25% PS-PC-chol5 GUV solution. 16 ul was deposited. 
+
+Cleaned up the water line again.
+Added PVA to the water line.  
+
+
+
+** April 6, 2026, Monday
+
+Electroformation of the 25%PS-PC-Chol5 GUVs done at 2 Volts 20 Hz for 2 hours. 
+BSA Solution: 3 uM , with MW of 66.43kDA. Prepare BSA Fraction 5 solution (5mg in 25 ml)
+Prepare BSA solution in 5 vials and dip the existing pipettes. 
+
+
+Deposit the SUV solution in the 5 ml vial and leave overnight as well. 
+
+**  April 8, 2026, Wednesday
+
+
+
+**  April 15, 2026, Wednesday Expt: Vary Cholesterol and DOPS Charge to study stability and fusion
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+| DOPC        | 2.5 mg/ml     | 241 ul  |        64.5% |
+| DOPS        | 2.5 mg/ml     | 96  ul  |          25% |
+| Cholesterol | 2.5 mg/ml     | 18.5 ul |          10% |
+| PE-CF       | 0.15 mg/ml    | 44 ul   |         0.5% |
+|-------------+---------------+---------+--------------|
+
+
+**** Green SUVs (DOPS)
+Prepare the solution for SUVs
+|---------+---------------+---------+--------------|
+| Content | Concentration | Volume  | Mole percent |
+|---------+---------------+---------+--------------|
+|         |               |         |              |
+| DOPC    | 2.5 mg/ml     | 73 ul   | 19.0 %       |
+| DOPS    | 2.5 mg/ml     | 257  ul | 80  %        |
+| CF-PE   | 0.15 mg/ml    | 70 ul   | 1  %         |
+|---------+---------------+---------+--------------|
+
+
+**** Red SUVs (DOTAP)
+Prepare the solution for SUVs
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| DOPC        | 2.5 mg/ml     | 40 ul   |        18.0% |
+| DOTAP       | 2.5 mg/ml     | 160  ul |        81.5% |
+| LissRhod-PE | 0.05 mg/ml    | 100 ul  |         0.5% |
+|-------------+---------------+---------+--------------|
+
+50 ul was deposited and left for drying overnight, in order to make the SUVs. 
+
+
+
+**  April 16, 2026, Thursday
+Made the sample holders in 7.5% PDMS and punched holes with 2.0 mm punch. 
+
+
+**  April 17, 2026, Friday
+Used the PE-CF Carboxyfluorescein dye and created new method for observation at 40x with 100 ms exposure time. 
+Washed the extrusion setup. 
+
+**  May  4, 2026, Monday
+It is very disappointing to realise that I don't work as frequently as I would like to be. 
+Due to this even a single experiment is taking a huge amount of time to finish. My health is part of the reason and other works were also part of it but now it is not so much. 
+
+
+**  May 19, 2026, Tuesday
+
+*** Glucose/sucrose solution preparation (Syringe-filtered)
+1. Sucrose: 0.24 M syringe filtered  (3.29 g in 40 ml DI water)
+2. Glucose: 0.26 M(18.70 g in 400 ml for 0.26 M)
+3. Glucose: 1.0 M syringe filtered, (7.20 g in 40 ml water for 1 M)
+
+*** GUV lipid mixture preparation
+DOPC, DOPS, Liss-Rhod, Cholesterol
+
+**** 25% PS GUVs 5% Cholesterol
+|-------------+---------------+----------+--------------|
+| Content     | Concentration | Volume   | Mole percent |
+|-------------+---------------+----------+--------------|
+| DOPC        | 2.5 mg/ml     | 100 ul   |          70% |
+| DOPS        | 2.5 mg/ml     | 36.9  ul |          25% |
+| Cholesterol | 2.5 mg/ml     | 3.5 ul   |           5% |
+| LissRhod-PE | 0.05 mg/ml    | 59.5     |         0.5% |
+|-------------+---------------+----------+--------------|
+
+
+*** PDMS 7.5%
+
+40 grams of silicone elastomer mixed with 3 grams of curing agent. 
+
+*** SUV deposit for drying
+100 ul of Green SUV was left for drying in MCT
+
+*** GUV deposit for drying 
+15-20 ul of GUV solution prepared today was left for drying on the ITO.
+
+
+**  May 20, 2026, Wednesday
+
+Make GUV 0% cholesterol solution.
+
+Also, make SUV 5% cholesterol solution
+
+**  May 21, 2026, Thursday
+We did electroformation of 5%-Chol,25%-PS,70% DOPC, 0.5% LissRhod-PE.
+We dipped it in Sucrose 0.24M for 15 minutes before starting electroformation.
+We cleaned ITOs and spacer with Pure IPA and Pure Ethanol.
+Then we started electroformation at 2 Vpp sine wave 10 Hz, with the spacer of thickness 1 mm (?). 
+After one hour, we poured 100 ul of GUV solution into 1 ml of Glucose 0.26M
+We picked 10 ul of that diluted solution and poured it into vessel chamber with 800 ul of media (Glucose 0.26 M)
+We aspirated with 8 um sized pipette.  
+
+*** We have optimised the fluorescence (0.5%)
+
+*** We have optimised the yield (Electroformation at 2 volts 10 Hz with spacer). 
+*** TODO Measure the thickness of spacer.
+*** TODO Make another spacer with PDMS.
+*** TODO Electroform DOPC GUVs. 
+*** TODO Electroform DOPC-PS 50% - Chol 5% GUVs. Make 200 ul of solution
+*** TODO Electroform DOPC-PS 25% - Chol 0% GUVs. Make 200 ul of solution.
+*** TODO Electroform DOPC-F GUVs - Make 100 ul of solution.  
+
+*** How long are the GUVs stable for in time over days?
+*** How to optimise the shape of GUVs (avoid threads and sticking things)
+*** Maximum pressure? (Is bursting pressure independent of size/shape?)
+*** How much time can we aspirate vesicle for below the maximum pressure?
+*** How does the Maximum pressure vary with constituents? (DOPC, DOPC/PS, DOPC/PS/Chol)
+*** Matlab Calculation of Aspiration versus tension.
+*** Image Analysis in Fiji/MATLAB
+*** Matlab calculation of Volume change and area change. 
+
+#+BEGIN_SRC python :results output
+import numpy as np
+print("Hello,world")
+
+#%% Let's make 90% charged DOTAP-DOPC (Positive, non-fluoroscent)
+Chemicals = ['DOPS','DOPC','LissRhod-PE', 'Cholesterol', 'NBD-DOTAP']
+Concentrations = [2.5,2.5,0.05,2.5,0.01]; # In chloroform
+MixtureVolumes = [20,150,0,0,0]; # in microliters
+Molecular_Weights = [809.518,785.593,1300.712,386.65,710.34]
+
+# Number of Weights in mixture
+Weights = np.multiply(MixtureVolumes, Concentrations)
+# Percentage of moles in mixture
+WeightPercentages =  np.array(Weights) / np.sum(Weights) * 100
+
+Moles = np.array(Weights)/np.array(Molecular_Weights)
+MolePercentages = np.array(Moles) / np.sum(Moles) *100
+np.set_printoptions(suppress=True, precision=5)
+
+print('Moles')
+print(Moles)
+print('Weights')
+print(Weights)
+# Percentage of moles in mixture
+print('weight Percentages')
+print(np.round(WeightPercentages,2))
+print('Mole Percentages')
+print(np.round(MolePercentages,2))
+
+#+END_SRC
+
+**  May 22, 2026, Friday
+Analyse
+**** DOPC GUVs 0% Cholesterol
+|-------------+---------------+----------+--------------|
+| Content     | Concentration | Volume   | Mole percent |
+|-------------+---------------+----------+--------------|
+| DOPC        | 2.5 mg/ml     | 141.2 ul |        99.5% |
+| LissRhod-PE | 0.05 mg/ml    | 58.8     |         0.5% |
+|-------------+---------------+----------+--------------|
+
+
+*** 20% Cholesterol - DOPC
+
+
+**** DOPC GUVs 20% Cholesterol
+|-------------+---------------+----------+--------------|
+| Content     | Concentration | Volume   | Mole percent |
+|-------------+---------------+----------+--------------|
+| DOPC        | 2.5 mg/ml     | 121.6 ul |        79.5% |
+| Cholesterol | 2.5 mg/ml     | 15.1 ul  |          20% |
+| LissRhod-PE | 0.05 mg/ml    | 63.3     |         0.5% |
+|-------------+---------------+----------+--------------|
+
+
+
+*** 40% Cholesterol - DOPC
+
+
+**** DOPC GUVs 40% Cholesterol
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+| DOPC        | 2.5 mg/ml     | 98.7 ul |        59.5% |
+| Cholesterol | 2.5 mg/ml     | 32.7 ul |          40% |
+| LissRhod-PE | 0.05 mg/ml    | 68.7    |         0.5% |
+|-------------+---------------+---------+--------------|
+
+
+** May 25, 2026 Monday
+We took data for the 
+Zero Pressure Voltage was 9.05 +- 0.05 V. 
+Volume level of the pressure chamber is 13ml.  
+We did pipetting experiments on 100% DOPC GUVs and 60% DOPC-40% Cholesterol GUVs. 
+
+**  May 26, 2026, Tuesday
+
+**** DOPS 25 %, Chol 40%, DOPC 35%
+
+|-------------+-----------------------+-------------+--------------|
+| Content     | Concentration (mg/ml) | Volume (ul) | Mole percent |
+|-------------+-----------------------+-------------+--------------|
+| DOPC        |                   2.5 |        56.9 |         34.5 |
+| DOPS        |                   2.5 |        42.5 |           25 |
+| Cholesterol |                   2.5 |        32.4 |           40 |
+| LissRhod-PE |                  0.05 |        68.2 |          0.5 |
+|             |                       |             |              |
+**** DOPS 50%, Chol 20%, DOPC 30% 
+|-------------+-----------------------+-------------+--------------|
+| Content     | Concentration (mg/ml) | Volume (ul) | Mole percent |
+|-------------+-----------------------+-------------+--------------|
+| DOPC        |                   2.5 |        44.6 |         29.5 |
+| DOPS        |                   2.5 |        77.9 |           50 |
+| Cholesterol |                   2.5 |        14.9 |           20 |
+| LissRhod-PE |                  0.05 |        62.5 |          0.5 |
+|             |                       |             |              |
+
+
+**  May 27, 2026, Wednesday
+Zero pressure voltage was 7.9 +- 0.05
+Volume level was 13 ml for the pressure chamber. 
+We did an experiment for bursting tension and Area-Volume Calculation for 0% Chol-100% DOPC GUVs as well as 40% Chol-100% DOPC GUVs. 
+
+
+**  May 28, 2026, Thursday
+Further DOPS mixture preparations
+We will test 100% DOPS, 50% DOPS-Cholesterol, 50% DOPS - 45% DOPC - 5% Cholesterol
+
+**** 100% DOPS 
+|-------------+-----------------------+-------------+--------------|
+| Content     | Concentration (mg/ml) | Volume (ul) | Mole percent |
+|-------------+-----------------------+-------------+--------------|
+| DOPC        |                   2.5 |        44.6 |         29.5 |
+| LissRhod-PE |                  0.05 |        62.5 |          0.5 |
+|-------------+-----------------------+-------------+--------------|
+
+**** 50% DOPS, 45%DOPC, 5% Cholesterol
+|-------------+-----------------------+-------------+--------------|
+| Content     | Concentration (mg/ml) | Volume (ul) | Mole percent |
+|-------------+-----------------------+-------------+--------------|
+| DOPC        |                   2.5 |        73.7 |         44.5 |
+| DOPS        |                   2.5 |        63.6 |           50 |
+| Cholesterol |                   2.5 |         3.5 |            5 |
+| LissRhod-PE |                  0.05 |        59.2 |          0.5 |
+|             |                       |             |              |
+
+
+**** 50% DOPS, 50% cholesterol
+|-------------+-----------------------+-------------+--------------|
+| Content     | Concentration (mg/ml) | Volume (ul) | Mole percent |
+|-------------+-----------------------+-------------+--------------|
+| DOPS        |                   2.5 |        87.6 |           50 |
+| Cholesterol |                   2.5 |        41.9 |           50 |
+| LissRhod-PE |                  0.05 |        70.5 |          0.5 |
+|             |                       |             |              |
+
+
+
+** May 29, 2026, Friday
+We analysed data for 100% DOPC GUVs.
+At a strain rate of 0.005 mN/m/s, we obtain bursting tenstion of 1 mN/m
+
+** May 30, 2025, Saturday
+We analysed data for 40% Cholesterol-60% DOPC vesicles. We obtain higher bursting tension, at least double.
+
+**  June  1, 2026, Monday
+We analyse data from 25%PS-40%Chol GUV pipetting experiments.
+
+
+**  June  4, 2026, Thursday
+At 9.20, 50% DOPS-45%DOPC-5%Chol and 50%DOPS-50%Chol GUV solutions were submerged in 0.24 M sucrose with a spacer. 
+We leave it for 15 minutes and then we will start electroformation at 2 volts 10 Hz. 
+
+**  June  6, 2026, Saturday
+
+
+**  June  8, 2026, Monday
+
+SUV concentration:
+**** Red SUVs (DOTAP)
+Prepare the solution for SUVs
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| DOPC        | 2.5 mg/ml     | 40 ul   |        18.0% |
+| DOTAP       | 2.5 mg/ml     | 160  ul |        81.5% |
+| LissRhod-PE | 0.05 mg/ml    | 100 ul  |         0.5% |
+|-------------+---------------+---------+--------------|
+
+
+
+**  June 09, 2026, Tuesday
+
+We took 25% DOPS GUVs and mixed them with SUVs for a fusion experiment. 
+1 ml of original solution of SUVs was produced. 
+*** 25% PS - SUV Concentration 1
+SUV concentration of 0.05 (0.5 ml in 10 ml of Glucose)
+did not give any fusion. 
+
+*** 25% PS - SUV Concentration 0.22
+Fusion was observed.
+
+
+**  June 11, 2026, Thursday
+*** GUV 10% PS - SUV 0.22
+Fusion was observed.
+
+*** Goal: from Fusion experiment
+**** Measure the fusion rate
+**** Measure the Area/Volume increase
+**** Measure the mixing time it takes for fused SUV to mix in the GUV.  
+
+How do the fusion rate, area change etc change with charges. (10%, 20%) 
+How does the mixing time change with cholesterol.  (5%, 40%)
+
+
+**  June 15, 2026, Monday
+There are a few problems that we can still optimize. 
+1. We can keep glucose inside and outside so that they are weightless.
+2. We can test the 3 V yield so that we have better yield. 
+3. We are yet to test the SOPC/CerC6 part. 
+
+After doing all this, we will be able to have very clean measurements. But the question will then be, what do we do with those measurements. So, we will need to then, read papers and figure out what is something worth doing. 
+I can also try writing a proposal and getting money for JOVE publication. 
+
+**  June 16, 2026, Tuesday
+
+We made Fluorescent 25%PS vesicles and non-fluorescent 10% PS vesicles using the 3Volt 10 Hz protocol. 
+Inside the vesicles we had put Glucose and outside also, glucose was there. Therefore, contrast was less and vesicles did not settle down. 
+Got good yield but some were more than bilayers. 
+We did an experiment for pulling and finding out the bursting.
+
+* Final Experiments for Limits of Growth
+
+** 
+Limits of growth
+Rates of mixing
+
+
+**  June 20, 2026, Saturday
+We are going to start with two concentrations of SUVs and two levels of charges on GUVs. 
+We will use 0.125 and 0.25 SUVs along with 10% and 25% GUVs. Cholesterol dependency we can test as well, for 5 and 40% later. 
+
+Next we need to decide how many experiments it will be per week. We will start with 40% chol. 
+We need to have non-fluorescent GUVs and fluorescent SUVs like we make. 
+
+**  June 22, 2026, Monday
+
+
+*** Make the SUV solution again.
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| DOPC        | 2.5 mg/ml     | 40 ul   |        18.0% |
+| DOTAP       | 2.5 mg/ml     | 160  ul |        81.5% |
+| LissRhod-PE | 0.05 mg/ml    | 100 ul  |         0.5% |
+|-------------+---------------+---------+--------------|
+
+
+
+
+*** Make PDMS 7.5%
+
+35 g of silicon elastomer and 2.625 grams of cross-linker (7.5 percent)
+
+
+*** Prepare the GUV solutions and deposit on ITO.
+We will work with 40% cholesterol constituents, with 10% and 25% negatively charged PS lipids in the mixture. 
+
+
+**  June 23, 2026, Tuesday
+We did experiment with 25% PS GUV (Fluorescent and non-Fluorescent ones) in presence of flowing SUVs (12.5 % concentration).
+
+
+**  June 29, 2026, Monday
+1. PDMS sample holder preparation.
+2. Leave the GUV/SUV solutions for drying
+3. 
+
+**  June  30, 2026, Tuesday
+At 12.5% SUV concentration and with 25% GUVs we observe that the vesicle's aspiration reduces on fusion but even if we pull more by increasing pressure and increasing tension, there is no division taking place. 
+We haven't clearly established the impact of tension on the fluorescent intensity though, yet. 
+
+
+**  July  2, 2026, Thursday
+Our observation is that when fusion starts, assimilation makes the membrane surface more tense and aspirated reduces. 
+If the SUV supply is beyond a critical number then the surface will start dividing again. 
+
+We deposited 25% SUV solution into 25%PS-40%Chol GUVs and we observed constant division at a fast rate. This depleted to a slower rates.
+
+The question now is what happens if we start putting in SUVs as a fuel again. And we make these observations starting fusion again at 4 pm. 
+
+
+**  July  7, 2026, Tuesday
+
+**** 15% DOPS, 45%DOPC, 40% Cholesterol
+|-------------+-----------------------+-------------+--------------|
+| Content     | Concentration (mg/ml) | Volume (ul) | Mole percent |
+|-------------+-----------------------+-------------+--------------|
+| DOPC        |                   2.5 |       141.5 |           45 |
+| DOPS        |                   2.5 |        48.6 |           15 |
+| Cholesterol |                   2.5 |        61.9 |           40 |
+|             |                       |             |              |
+
+
+**** 40% DOPS, 20%DOPC, 40% Cholesterol
+|-------------+-----------------------+-------------+--------------|
+| Content     | Concentration (mg/ml) | Volume (ul) | Mole percent |
+|-------------+-----------------------+-------------+--------------|
+| DOPC        |                   2.5 |        31.5 |           20 |
+| DOPS        |                   2.5 |        54.8 |           40 |
+| Cholesterol |                   2.5 |          31 |           40 |
+|             |                       |             |              |
+
+
+
+**  July 11, 2026, Saturday
+For 15% GUV, bursting pressure was found to be at 3.5 Volts.
+Zero pressure was at 8.7 Volts.
+Today we took data for 
+|-------------------+-------------------+---------+------------------------|
+| SUV Concentration | GUV Concentration | Tension | Observations           |
+|-------------------+-------------------+---------+------------------------|
+|               25% | 15%ps-40%chol     | 8.7-7.4 | bursts                 |
+|               25% | 15%ps-40%chol     | Free    | fluoresnce increases   |
+|               25% | 25%ps-40%Chol     | free    | fluorescence increases |
+|                   |                   |         |                        |
+
+**  July 13, 2026, Monday
+Make new 10% GUVs and 25% GUVs.
+Plan to work with 11.2% SUV concentration and 15% PS-40%chol GUVs.
+
+**  July 28, 2026, Tuesday
+
+Deposited 40%DOPS-40%Chol SUVs 15 ul on a new ITO.
+Also depositing Red SUV 100 ul. 
+
+*** make the suv solution for 40% chol (red chol suv)
+|-------------+---------------+---------+--------------|
+| content     | concentration | volume  | mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| dopc        | 2.5 mg/ml     | 40 ul   |        10.8% |
+| dotap       | 2.5 mg/ml     | 160  ul |        48.8% |
+| lissrhod-pe | 0.05 mg/ml    | 100 ul  |        0.33% |
+| cholesterol | 2.5 mg/ml     | 72.6    |          40% |
+|-------------+---------------+---------+--------------|
+
+** July 29, 2026, Wednesday 
+Electroformation done for 25% and 40% PS GUVs.
+25% one formed but 40% did not form. 
+Can try with 35% GUVs next time. 
+
+**  July 30, 2026, Thursday
+SUV 100 nm formation.
+Dilute the SUVs and flow through the sample chamber. 
+Attempt with cholesterol SUVs and see what happens.
+
+** August 13, 2026, Thursday 
+
+
+*** Make the suv solution for 40% chol (red chol suv)
+|-------------+---------------+---------+--------------|
+| content     | concentration | volume  | mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| dopc        | 2.5 mg/ml     | 40 ul   |        10.8% |
+| dotap       | 2.5 mg/ml     | 160  ul |        48.8% |
+| lissrhod-pe | 0.05 mg/ml    | 100 ul  |        0.33% |
+| cholesterol | 2.5 mg/ml     | 72.6    |          40% |
+|-------------+---------------+---------+--------------|
+
+
+*** Make the GUV solution for 25% PS 20% chol vesicles
+|-------------+-----------------------+-------------+--------------|
+| Content     | Concentration (mg/ml) | Volume (ul) | Mole percent |
+|-------------+-----------------------+-------------+--------------|
+| DOPC        |                   2.5 |        31.5 |           20 |
+| DOPS        |                   2.5 |        54.8 |           40 |
+| Cholesterol |                   2.5 |          31 |           40 |
+|-------------+-----------------------+-------------+--------------|
+
+
+*** Make the GUV solution for 35% PS 40% chol vesicles
+|-------------+-----------------------+-------------+--------------|
+| Content     | Concentration (mg/ml) | Volume (ul) | Mole percent |
+|-------------+-----------------------+-------------+--------------|
+| DOPC        |                   2.5 |        31.5 |           20 |
+| DOPS        |                   2.5 |        54.8 |           40 |
+| Cholesterol |                   2.5 |          31 |           40 |
+|-------------+-----------------------+-------------+--------------|
+
+
