@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.tex
+
+# Editor/OS cruft
+*.swp
+.idea/

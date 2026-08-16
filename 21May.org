@@ -1,0 +1,59 @@
+**  May 21, 2026, Thursday
+We did electroformation of 5%-Chol,25%-PS,70% DOPC, 0.5% LissRhod-PE.
+We dipped it in Sucrose 0.24M for 15 minutes before starting electroformation.
+We cleaned ITOs and spacer with Pure IPA and Pure Ethanol.
+Then we started electroformation at 2 Vpp sine wave 10 Hz, with the spacer of thickness 1 mm (?). 
+After one hour, we poured 100 ul of GUV solution into 1 ml of Glucose 0.26M
+We picked 10 ul of that diluted solution and poured it into vessel chamber with 800 ul of media (Glucose 0.26 M)
+We aspirated with 8 um sized pipette.  
+
+*** We have optimised the fluorescence (0.5%)
+
+*** We have optimised the yield (Electroformation at 2 volts 10 Hz with spacer). 
+*** TODO Measure the thickness of spacer.
+*** TODO Make another spacer with PDMS.
+*** TODO Electroform DOPC GUVs. 
+*** TODO Electroform DOPC-PS 50% - Chol 5% GUVs. Make 200 ul of solution
+*** TODO Electroform DOPC-PS 25% - Chol 0% GUVs. Make 200 ul of solution.
+*** TODO Electroform DOPC-F GUVs - Make 100 ul of solution.  
+
+*** How long are the GUVs stable for in time over days?
+*** How to optimise the shape of GUVs (avoid threads and sticking things)
+*** Maximum pressure? (Is bursting pressure independent of size/shape?)
+*** How much time can we aspirate vesicle for below the maximum pressure?
+*** How does the Maximum pressure vary with constituents? (DOPC, DOPC/PS, DOPC/PS/Chol)
+*** Matlab Calculation of Aspiration versus tension.
+*** Image Analysis in Fiji/MATLAB
+*** Matlab calculation of Volume change and area change. 
+
+#+BEGIN_SRC python :results output
+import numpy as np
+print("Hello,world")
+
+#%% Let's make 90% charged DOTAP-DOPC (Positive, non-fluoroscent)
+Chemicals = ['DOPS','DOPC','LissRhod-PE', 'Cholesterol', 'NBD-DOTAP']
+Concentrations = [2.5,2.5,0.05,2.5,0.01]; # In chloroform
+MixtureVolumes = [20,150,0,0,0]; # in microliters
+Molecular_Weights = [809.518,785.593,1300.712,386.65,710.34]
+
+# Number of Weights in mixture
+Weights = np.multiply(MixtureVolumes, Concentrations)
+# Percentage of moles in mixture
+WeightPercentages =  np.array(Weights) / np.sum(Weights) * 100
+
+Moles = np.array(Weights)/np.array(Molecular_Weights)
+MolePercentages = np.array(Moles) / np.sum(Moles) *100
+np.set_printoptions(suppress=True, precision=5)
+
+print('Moles')
+print(Moles)
+print('Weights')
+print(Weights)
+# Percentage of moles in mixture
+print('weight Percentages')
+print(np.round(WeightPercentages,2))
+print('Mole Percentages')
+print(np.round(MolePercentages,2))
+
+#+END_SRC
+
