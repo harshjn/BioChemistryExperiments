@@ -1802,4 +1802,47 @@ Attempt with cholesterol SUVs and see what happens.
 | Cholesterol |                   2.5 |          31 |           40 |
 |-------------+-----------------------+-------------+--------------|
 
+Deposited 15 ul of these on two slides, and left the SUV solution for drying overnight.
+
+**  August 16, 2026, Sunday
+ 11:57 AM Soaked the ITOs in Sucrose solution. 
+Start electroformation at 2 volts 10 Hz. 
+Continued till 3 pm. 
+Both GUVs are formed, but size may not be optimal. 
+No fusion was observed in case of the 25/20 aspirated vesicle in the presence of 40chol/TAP SUVs.
+I will repeat the measurements today.
+
+**  August 27, 2026, Thursday
+Puller program 1 for P-97 for pulling 1.5mm pipettes:
+heat:585, Pull:80, Vel: 60, Time:150
+
+**   August 28, 2026, Friday
+I will deposit GUV solution and SUV solution for final set of experiments. 
+Loc 77: 25/40 GUV solution
+Loc 78: 25/20 GUV solution
+Loc 79: 25/5 GUV solution
+
+I will also dip six pipettes into the BSA solution. 
+
+Prepare these SUV solutions and leave them in 3 vials for drying:
+
+|-------------+---------------+---------+--------------|
+| content     | concentration | volume  | mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| dopc        | 2.5 mg/ml     | 40 ul   |        10.8% |
+| dotap       | 2.5 mg/ml     | 160  ul |        48.8% |
+| lissrhod-pe | 0.05 mg/ml    | 100 ul  |        0.33% |
+| cholesterol | 2.5 mg/ml     | 72.6    |          40% |
+|-------------+---------------+---------+--------------|
+
+Also prepare these and again leave them in 3 vials for drying:
+|-------------+---------------+---------+--------------|
+| Content     | Concentration | Volume  | Mole percent |
+|-------------+---------------+---------+--------------|
+|             |               |         |              |
+| DOPC        | 2.5 mg/ml     | 40 ul   |        18.0% |
+| DOTAP       | 2.5 mg/ml     | 160  ul |        81.5% |
+| LissRhod-PE | 0.05 mg/ml    | 100 ul  |         0.5% |
+|-------------+---------------+---------+--------------|
 
